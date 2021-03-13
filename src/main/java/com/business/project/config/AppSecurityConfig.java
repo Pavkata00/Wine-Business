@@ -28,7 +28,8 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll().
-                antMatchers("/","/index","/home").permitAll();
+        http.authorizeRequests().
+                antMatchers("/","/index","/home").permitAll().
+                antMatchers("/js/**", "/css/**", "/img/**").permitAll();
     }
 }
