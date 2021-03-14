@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -29,7 +30,21 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().
-                antMatchers("/","/index","/home","/register", "/login").permitAll().
-                antMatchers("/js/**", "/css/**", "/img/**").permitAll();
+                antMatchers("/js/**", "/css/**", "/img/**").permitAll().
+                antMatchers("/","/users/register","/users/login").permitAll().
+                antMatchers("/**").authenticated().
+                    and().
+                formLogin().
+                loginPage("/users/login").
+                usernameParameter("username").
+                passwordParameter("password").
+                defaultSuccessUrl("/").
+                failureForwardUrl("/users/login-error").
+                    and().
+                logout().
+                logoutUrl("/logout").
+                logoutSuccessUrl("/").
+                invalidateHttpSession(true).
+                deleteCookies("JSESSIONID");
     }
 }

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+>
 <head th:replace="fragments/commons::head"></head>
 <body>
 <header th:replace="fragments/commons::navigation"></header>
@@ -11,11 +12,11 @@
             <img alt="Metallica image" src="/img/metallica.jpg" class="w-50 rounded">
         </div>
         <div class="row g-3 align-items-center">
-            <div class="alert alert-danger" role="alert">
+            <div th:if="${bad_credentials}" class="alert alert-danger" role="alert">
                 This username and password combination does not exist.
             </div>
             <form
-                action="/"
+                th:action="@{/users/login}"
                 method="POST">
                 <!--User name-->
                 <div>
@@ -24,6 +25,7 @@
                     </div>
                     <div class="col-auto">
                         <input type="text"
+                               th:value="${username}"
                                name="username"
                                id="inputUsername"
                                class="form-control"

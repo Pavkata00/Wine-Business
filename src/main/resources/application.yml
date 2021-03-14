@@ -5,7 +5,7 @@ spring:
         username: root
         # Put here your password
         password: 1478523699
-        url: jdbc:mysql://localhost:3306/wine_DB?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true
+        url: jdbc:mysql://localhost:3306/wine_business_db?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true
     jpa:
         #For MySQL 8 uncomment bellow (comment MySQL 5)
         database-platform: org.hibernate.dialect.MySQL8Dialect

@@ -1,9 +1,6 @@
 package com.business.project.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +11,7 @@ public class UserEntity extends BaseEntity {
     private String username;
     private String email;
     private String password;
+    private String fullName;
     private List<RoleEntity> roles = new ArrayList<>();
 
     //todo consider adding gender/age etc.
@@ -49,13 +47,21 @@ public class UserEntity extends BaseEntity {
         this.password = password;
     }
 
-    //TODO IF ERRORS ADD FETCH EAGER LIKE LUCHO!!!
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     public List<RoleEntity> getRoles() {
         return roles;
     }
 
     public void setRoles(List<RoleEntity> roles) {
         this.roles = roles;
+    }
+
+    @Column(name = "full_name",nullable = false)
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 }
