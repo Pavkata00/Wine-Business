@@ -29,7 +29,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().
-                antMatchers("/","/index","/home").permitAll().
+                antMatchers("/","/index","/home","/register", "/login").permitAll().
                 antMatchers("/js/**", "/css/**", "/img/**").permitAll();
     }
 }
