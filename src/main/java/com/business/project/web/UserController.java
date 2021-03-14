@@ -71,7 +71,13 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    private String login() {
+    private String login(Model model) {
+        if (!model.containsAttribute("username")) {
+
+            model.addAttribute("bad_credentials", false);
+            //todo consider removing
+            model.addAttribute("username", "");
+        }
         return "login";
     }
     @PostMapping("/login-error")
