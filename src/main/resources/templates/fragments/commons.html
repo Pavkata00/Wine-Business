@@ -29,7 +29,7 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="/statistics">Statistics</a>
-                <a class="dropdown-item" href="/articles/add">Add article</a>
+                <a class="dropdown-item" href="/articles/add">Add wine</a>
                 <a class="dropdown-item" href="#">Something else here</a>
             </div>
         </div>
@@ -53,10 +53,7 @@
                 </li>
 
                 <li class="nav-item ">
-                    <a sec:authorize="isAuthenticated()" class="nav-link text-white active h5" href="/albums/add">Add Album</a>
-                </li>
-                <li class="nav-item ">
-                    <a sec:authorize="isAuthenticated()" class="nav-link text-white active h5" href="/articles/all">All articles</a>
+                    <a sec:authorize="isAuthenticated()" class="nav-link text-white active h5" href="/articles/all">All wines</a>
                 </li>
                 <li sec:authorize="isAuthenticated()" class="nav-item">
                     <form th:action="@{/logout}" method="POST">
@@ -74,7 +71,9 @@
 <footer th:fragment="footer" class="footer bg-blur">
     <div class="container-fluid text-center">
         <div class="h5 text-white">
-            &copy;SoftUni Spring Team 2021. All rights reserved.
+            &copy;Naydenovi's wine company 2009 - 2021. All rights reserved.
+            Contact: +359 895 587 386
+            Email: wine_naydenovi@gmail.com
         </div>
     </div>
 </footer>
