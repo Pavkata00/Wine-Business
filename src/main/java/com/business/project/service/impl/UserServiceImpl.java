@@ -101,6 +101,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isAdmin(UserServiceModel userServiceModel) {
-        return this.userRepository.findByUsername(userServiceModel.getUsername()).get().getRoles().size()==2;
+        UserEntity userEntity = this.userRepository.findByUsername(userServiceModel.getUsername()).orElse(null);
+
+        return userEntity.getRoles().size()==2;
     }
 }

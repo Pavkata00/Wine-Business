@@ -32,7 +32,7 @@ public class AdminController {
             model.addAttribute("userCommandBindingModel", new UserCommandBindingModel());
             model.addAttribute("isAlreadyAdmin",false);
             model.addAttribute("isAlreadyGuestUser",false);
-            model.addAttribute("userFound",false);
+            model.addAttribute("userFound",true);
         }
 
         return "control";
@@ -50,24 +50,29 @@ public class AdminController {
 
         UserServiceModel userServiceModel = this.modelMapper.map(userCommandBindingModel,UserServiceModel.class);
 
-        if (this.userService.usernameExists(userServiceModel)) {
+        if (!this.userService.usernameExists(userServiceModel)) {
             redirectAttributes.addFlashAttribute("userCommandBindingModel",userCommandBindingModel);
-            redirectAttributes.addFlashAttribute("userFound",true);
+            redirectAttributes.addFlashAttribute("userFound",false);
+            return "redirect:control";
         }
 
-        if (this.userService.isAdmin(userServiceModel) && userCommandBindingModel.getCommand().equals("promote")) {
+        if (this.userService.isAdmin(userServiceModel) && userCommandBindingModel.getCommand().equals("Promote")) {
 
             redirectAttributes.addFlashAttribute("userCommandBindingModel",userCommandBindingModel);
             redirectAttributes.addFlashAttribute("isAlreadyAdmin",true);
+            redirectAttributes.addFlashAttribute("userFound",true);
+
             return "redirect:control";
 
         } else if (!this.userService.isAdmin(userServiceModel) && userCommandBindingModel.getCommand().equals("Demote") ){
             redirectAttributes.addFlashAttribute("userCommandBindingModel",userCommandBindingModel);
             redirectAttributes.addFlashAttribute("isAlreadyGuestUser",true);
+            redirectAttributes.addFlashAttribute("userFound",true);
             return "redirect:control";
         }
 
         this.userService.executeCommand(userServiceModel);
+
 
         return "redirect:control";
     }

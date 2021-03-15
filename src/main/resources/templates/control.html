@@ -42,11 +42,12 @@
                             <option value="Promote">Promote</option>
                             <option value="Demote">Demote</option>
                         </select>
-                        <small id="commandError" class="form-text bg-danger rounded">You must select command.</small>
+                        <small th:if="${#fields.hasErrors('command')}" th:errors="*{command}" id="commandError" class="form-text bg-danger rounded">You must select command.</small>
                     </div>
                 </div>
                 <small th:if="${isAlreadyAdmin}" id="controlCommandAdmin" class="form-text bg-danger rounded">This is already admin account.</small>
                 <small th:if="${isAlreadyGuestUser}" id="controlCommandGuest" class="form-text bg-danger rounded">This is already guest account.</small>
+                <small th:if="${successCommand}" id="controlCommandSuccess" class="form-text bg-danger rounded">Command executed successfully.</small>
                 <div class="d-flex justify-content-center mt-2">
                     <button class="btn btn-primary btn-block w-50" type="submit">Execute command</button>
                 </div>
