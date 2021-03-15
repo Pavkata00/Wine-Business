@@ -37,4 +37,9 @@ public class FactoryServiceImpl implements FactoryService {
             this.factoryRepository.save(factoryBurgas);
         }
     }
+
+    @Override
+    public FactoryEntity getFactoryByName(String factory) {
+        return this.factoryRepository.findByName(factory).orElse(null);
+    }
 }

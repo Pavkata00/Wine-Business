@@ -1,17 +1,12 @@
-package com.business.project.model.entity;
+package com.business.project.model.service;
 
+import com.business.project.model.entity.FactoryEntity;
 import com.business.project.model.entity.enums.TypeEnum;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
-@Entity
-@Table(name = "wines")
-public class WineEntity extends BaseEntity {
+public class WineServiceModel {
 
     private String name;
     private String description;
@@ -19,14 +14,12 @@ public class WineEntity extends BaseEntity {
     private BigDecimal price;
     private int amount;
     private LocalDate madeDate;
-    private TypeEnum type;
-    private FactoryEntity factory;
-    // todo   private List<String> reviews = new ArrayList<>();
+    private String type;
+    private String factory;
 
-    public WineEntity() {
+    public WineServiceModel() {
     }
 
-    @Column(name = "name", nullable = false, unique = true)
     public String getName() {
         return name;
     }
@@ -35,7 +28,6 @@ public class WineEntity extends BaseEntity {
         this.name = name;
     }
 
-    @Column(name = "description", columnDefinition = "TEXT")
     public String getDescription() {
         return description;
     }
@@ -44,7 +36,6 @@ public class WineEntity extends BaseEntity {
         this.description = description;
     }
 
-    @Column(name = "image_url")
     public String getImageUrl() {
         return imageUrl;
     }
@@ -53,7 +44,14 @@ public class WineEntity extends BaseEntity {
         this.imageUrl = imageUrl;
     }
 
-    @Column(name = "amount", nullable = false)
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
     public int getAmount() {
         return amount;
     }
@@ -62,7 +60,6 @@ public class WineEntity extends BaseEntity {
         this.amount = amount;
     }
 
-    @Column(name = "made_date", nullable = false)
     public LocalDate getMadeDate() {
         return madeDate;
     }
@@ -71,30 +68,19 @@ public class WineEntity extends BaseEntity {
         this.madeDate = madeDate;
     }
 
-    @Enumerated(EnumType.STRING)
-    public TypeEnum getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(TypeEnum type) {
+    public void setType(String type) {
         this.type = type;
     }
 
-    @ManyToOne
-    public FactoryEntity getFactory() {
+    public String getFactory() {
         return factory;
     }
 
-    public void setFactory(FactoryEntity factory) {
+    public void setFactory(String factory) {
         this.factory = factory;
-    }
-
-    @Column(name = "price", nullable = false)
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
     }
 }
