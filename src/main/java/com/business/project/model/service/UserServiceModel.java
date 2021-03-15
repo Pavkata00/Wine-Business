@@ -6,6 +6,7 @@ public class UserServiceModel {
     private String email;
     private String password;
     private String fullName;
+    private String command;
 
     public UserServiceModel() {
     }
@@ -40,5 +41,13 @@ public class UserServiceModel {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
+    }
+
+    public String getCommand() {
+        return command;
+    }
+
+    public void setCommand(String command) {
+        this.command = command;
     }
 }

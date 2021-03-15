@@ -20,7 +20,6 @@ public class WineAddBindingModel {
     private int amount;
     private LocalDate madeDate;
 
-    //todo check for type mistake make it enum
     private String type;
     private String factory;
 

@@ -10,4 +10,8 @@ public interface UserService {
     boolean emailExists(UserServiceModel userServiceModel);
 
     void initAdmin();
+
+    void executeCommand(UserServiceModel userServiceModel);
+
+    boolean isAdmin(UserServiceModel userServiceModel);
 }

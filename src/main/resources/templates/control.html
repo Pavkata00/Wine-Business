@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head th:replace="fragments/commons::head"></head>
+<body>
+<header th:replace="fragments/commons::navigation"></header>
+<main class="p-5 align-content-center bg-blur my-register-div">
+    <h1 class="text-light    border-bottom mb-5">Admin Panel</h1>
+    <div class="d-flex justify-content-center">
+        <div class="row g-3 align-items-center">
+            <img alt="Login image" src="/img/loginPhoto.jpg" class="w-50 rounded">
+        </div>
+        <div class="row g-3 align-items-center">
+            <div th:unless="${userFound}" class="alert alert-danger" role="alert">
+                This username does not exist.
+            </div>
+            <form
+                    th:action="@{/admin/control}"
+                    th:object="${userCommandBindingModel}"
+                    method="POST">
+                <div>
+                    <div class="col-auto">
+                        <label for="inputUsername" class="col-form-label text-light">Username</label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="text"
+                               th:field="*{username}"
+                               name="username"
+                               id="inputUsername"
+                               class="form-control"
+                               aria-describedby="usernameHelpInline">
+                        <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}" id="usernameError"
+                               class="invalid-feedback text-light form-text bg-danger rounded">Username length must be more than 3 characters</small>
+                    </div>
+                </div>
+                <div class="form-row m-5">
+                    <div class="col text-light">
+                        <label for="command">Command</label>
+                        <select id="command" name="command" class="custom-select">
+                            <option value="" selected>Select Command</option>
+                            <option value="Promote">Promote</option>
+                            <option value="Demote">Demote</option>
+                        </select>
+                        <small id="commandError" class="form-text bg-danger rounded">You must select command.</small>
+                    </div>
+                </div>
+                <small th:if="${isAlreadyAdmin}" id="controlCommandAdmin" class="form-text bg-danger rounded">This is already admin account.</small>
+                <small th:if="${isAlreadyGuestUser}" id="controlCommandGuest" class="form-text bg-danger rounded">This is already guest account.</small>
+                <div class="d-flex justify-content-center mt-2">
+                    <button class="btn btn-primary btn-block w-50" type="submit">Execute command</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</main>
+<footer th:replace="fragments/commons::footer"></footer>
+</body>
+</html>

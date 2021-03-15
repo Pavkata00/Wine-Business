@@ -75,7 +75,6 @@ public class UserController {
         if (!model.containsAttribute("username")) {
 
             model.addAttribute("bad_credentials", false);
-            //todo consider removing
             model.addAttribute("username", "");
         }
         return "login";

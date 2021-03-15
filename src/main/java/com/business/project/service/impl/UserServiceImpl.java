@@ -80,4 +80,27 @@ public class UserServiceImpl implements UserService {
             this.userRepository.save(userEntity);
         }
     }
+
+    @Override
+    public void executeCommand(UserServiceModel userServiceModel) {
+        String command = userServiceModel.getCommand();
+        RoleEntity roleEntityAdmin = this.roleService.getAdminRole();
+
+        RoleEntity roleEntityUser = this.roleService.getUserRole();
+
+        UserEntity userEntity = this.userRepository.findByUsername(userServiceModel.getUsername()).get();
+        if (command.equals("Promote")) {
+            userEntity.setRoles(List.of(roleEntityAdmin,roleEntityUser));
+
+
+        } else {
+            userEntity.setRoles(List.of(roleEntityUser));
+        }
+        this.userRepository.save(userEntity);
+    }
+
+    @Override
+    public boolean isAdmin(UserServiceModel userServiceModel) {
+        return this.userRepository.findByUsername(userServiceModel.getUsername()).get().getRoles().size()==2;
+    }
 }
