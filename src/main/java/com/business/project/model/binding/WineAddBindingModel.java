@@ -7,10 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -58,7 +55,7 @@ public class WineAddBindingModel {
         this.imageUrl = imageUrl;
     }
 
-    @NotNull
+    @NotNull(message = "You must write price!")
     @DecimalMin(value = "1", message = "Price should be at least 12lv. You don't sell cheap wine!")
     public BigDecimal getPrice() {
         return price;
@@ -78,7 +75,7 @@ public class WineAddBindingModel {
         this.amount = amount;
     }
 
-    @NotNull
+    @NotNull(message = "You must choose date!")
     @PastOrPresent
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     public LocalDate getMadeDate() {
@@ -89,7 +86,7 @@ public class WineAddBindingModel {
         this.madeDate = madeDate;
     }
 
-    @NotNull
+    @NotBlank(message = "You must choose type!")
     public String getType() {
         return type;
     }
@@ -99,7 +96,7 @@ public class WineAddBindingModel {
     }
 
 
-    @NotNull
+    @NotBlank(message = "You must choose factory!")
     public String getFactory() {
         return factory;
     }
