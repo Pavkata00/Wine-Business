@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head th:replace="fragments/commons::head"></head>
 <body>
 <header th:replace="fragments/commons::navigation"></header>
 <main class="p-5 align-content-center bg-blur my-register-div">
-    <h1 class="text-light    border-bottom mb-5">Admin Panel</h1>
+    <h1 class="text-light border-bottom mb-5">Admin Panel</h1>
+
+    <h4 class="text-light border-bottom mb-5">Here you can demote or promote users on your website!</h4>
     <div class="d-flex justify-content-center">
         <div class="row g-3 align-items-center">
             <img alt="Login image" src="/img/loginPhoto.jpg" class="w-50 rounded">
@@ -15,10 +16,7 @@
             <div th:unless="${userFound}" class="alert alert-danger" role="alert">
                 This username does not exist.
             </div>
-            <form
-                    th:action="@{/admin/control}"
-                    th:object="${userCommandBindingModel}"
-                    method="POST">
+            <form th:action="@{/admin/control}" th:object="${userCommandBindingModel}" method="POST">
                 <div>
                     <div class="col-auto">
                         <label for="inputUsername" class="col-form-label text-light">Username</label>

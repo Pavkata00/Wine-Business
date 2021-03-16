@@ -18,8 +18,8 @@ footer {
 }
 
 .bg-blur {
-    background-color: rgb(0, 0, 0); /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.6); /* Black w/opacity/see-through */
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.6);
     color: black;
     font-weight: bold;
     z-index: 2;
@@ -41,7 +41,7 @@ body {
 .carousel-item img {
     height: 500px;
 }
-
+/*todo consider removing*/
 #all-articles-jumbotron {
     background-image: url("/img/instruments.jpg");
     background-position: center;
