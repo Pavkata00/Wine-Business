@@ -61,9 +61,8 @@ public class AdminController {
 
         if (this.userService.isDemotingHimself(userServiceModel)) {
             redirectAttributes.addFlashAttribute("userCommandBindingModel",userCommandBindingModel);
-            redirectAttributes.addFlashAttribute("isSameUser",true);
-            redirectAttributes.addFlashAttribute("userFound",true);
-            redirectAttributes.addFlashAttribute("successCommand",false);
+
+            setAttributes(redirectAttributes);
             return "redirect:control";
         }
 
@@ -71,18 +70,16 @@ public class AdminController {
 
             redirectAttributes.addFlashAttribute("userCommandBindingModel",userCommandBindingModel);
             redirectAttributes.addFlashAttribute("isAlreadyAdmin",true);
-            redirectAttributes.addFlashAttribute("userFound",true);
-            redirectAttributes.addFlashAttribute("isSameUser", false);
-            redirectAttributes.addFlashAttribute("successCommand",false);
+
+            setAttributes(redirectAttributes);
 
             return "redirect:control";
 
         } else if (!this.userService.isAdmin(userServiceModel) && userCommandBindingModel.getCommand().equals("Demote") ){
             redirectAttributes.addFlashAttribute("userCommandBindingModel",userCommandBindingModel);
             redirectAttributes.addFlashAttribute("isAlreadyGuestUser",true);
-            redirectAttributes.addFlashAttribute("userFound",true);
-            redirectAttributes.addFlashAttribute("isSameUser", false);
-            redirectAttributes.addFlashAttribute("successCommand",false);
+
+            setAttributes(redirectAttributes);
             return "redirect:control";
         }
 
@@ -90,5 +87,11 @@ public class AdminController {
         redirectAttributes.addFlashAttribute("successCommand",true);
 
         return "redirect:control";
+    }
+
+    private void setAttributes(RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("isSameUser",true);
+        redirectAttributes.addFlashAttribute("userFound",true);
+        redirectAttributes.addFlashAttribute("successCommand",false);
     }
 }

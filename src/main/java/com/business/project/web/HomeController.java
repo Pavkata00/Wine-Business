@@ -8,6 +8,8 @@ public class HomeController {
 
     @GetMapping("/")
     private String home() {
+
+        //todo add home page and implement logic for redirect at /home.
         return "/index";
     }
 }
