@@ -33,6 +33,8 @@ public class AdminController {
             model.addAttribute("isAlreadyAdmin",false);
             model.addAttribute("isAlreadyGuestUser",false);
             model.addAttribute("userFound",true);
+            model.addAttribute("isSameUser", false);
+
         }
 
         return "control";
@@ -53,6 +55,15 @@ public class AdminController {
         if (!this.userService.usernameExists(userServiceModel)) {
             redirectAttributes.addFlashAttribute("userCommandBindingModel",userCommandBindingModel);
             redirectAttributes.addFlashAttribute("userFound",false);
+            redirectAttributes.addFlashAttribute("successCommand",false);
+            return "redirect:control";
+        }
+
+        if (this.userService.isDemotingHimself(userServiceModel)) {
+            redirectAttributes.addFlashAttribute("userCommandBindingModel",userCommandBindingModel);
+            redirectAttributes.addFlashAttribute("isSameUser",true);
+            redirectAttributes.addFlashAttribute("userFound",true);
+            redirectAttributes.addFlashAttribute("successCommand",false);
             return "redirect:control";
         }
 
@@ -61,6 +72,8 @@ public class AdminController {
             redirectAttributes.addFlashAttribute("userCommandBindingModel",userCommandBindingModel);
             redirectAttributes.addFlashAttribute("isAlreadyAdmin",true);
             redirectAttributes.addFlashAttribute("userFound",true);
+            redirectAttributes.addFlashAttribute("isSameUser", false);
+            redirectAttributes.addFlashAttribute("successCommand",false);
 
             return "redirect:control";
 
@@ -68,11 +81,13 @@ public class AdminController {
             redirectAttributes.addFlashAttribute("userCommandBindingModel",userCommandBindingModel);
             redirectAttributes.addFlashAttribute("isAlreadyGuestUser",true);
             redirectAttributes.addFlashAttribute("userFound",true);
+            redirectAttributes.addFlashAttribute("isSameUser", false);
+            redirectAttributes.addFlashAttribute("successCommand",false);
             return "redirect:control";
         }
 
         this.userService.executeCommand(userServiceModel);
-
+        redirectAttributes.addFlashAttribute("successCommand",true);
 
         return "redirect:control";
     }

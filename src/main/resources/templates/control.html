@@ -47,7 +47,8 @@
                 </div>
                 <small th:if="${isAlreadyAdmin}" id="controlCommandAdmin" class="form-text bg-danger rounded">This is already admin account.</small>
                 <small th:if="${isAlreadyGuestUser}" id="controlCommandGuest" class="form-text bg-danger rounded">This is already guest account.</small>
-                <small th:if="${successCommand}" id="controlCommandSuccess" class="form-text bg-danger rounded">Command executed successfully.</small>
+                <small th:if="${isSameUser}" id="controlCommandSelfUser" class="form-text bg-danger rounded">You can not demote/promote yourself.</small>
+                <small th:if="${successCommand}" id="controlCommandSuccess" class="form-text bg-success rounded">Command executed successfully.</small>
                 <div class="d-flex justify-content-center mt-2">
                     <button class="btn btn-primary btn-block w-50" type="submit">Execute command</button>
                 </div>

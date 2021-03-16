@@ -8,6 +8,8 @@ import com.business.project.repository.UserRepository;
 import com.business.project.service.RoleService;
 import com.business.project.service.UserService;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -104,5 +106,22 @@ public class UserServiceImpl implements UserService {
         UserEntity userEntity = this.userRepository.findByUsername(userServiceModel.getUsername()).orElse(null);
 
         return userEntity.getRoles().size()==2;
+    }
+
+    @Override
+    public boolean isDemotingHimself(UserServiceModel userServiceModel) {
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            String username;
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails)principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+
+        if (username.equals(userServiceModel.getUsername())) {
+            return true;
+        }
+        return false;
     }
 }
