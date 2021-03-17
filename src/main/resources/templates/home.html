@@ -12,7 +12,7 @@
     </div>
     <hr class="border-bottom w-75">
     <div class="row mt-5" id="albumsList">
-        <!-- Start single album -->
+
         <div th:each="t : ${T(com.business.project.model.entity.enums.TypeEnum).values()}" th:object="${t}" class="col-md-3">
             <div class="card mb-4 box-shadow">
                 <img th:src="@{/img/{pic}.png (pic = ${t})}" class="card-img" alt="Thumbnail [100%x225]"
@@ -20,15 +20,12 @@
                      style="height: 225px; width: 100%; display: block;">
                 <div class="card-body">
                     <div class="text-center">
-                        <p class="card-text border-bottom ">Name: Name of album</p>
-                        <p class="card-text border-bottom ">Artist: Metallica</p>
-                        <p class="card-text border-bottom ">Genre: Metal</p>
-                        <p class="card-text border-bottom ">Price: 19.99</p>
-                        <p class="card-text border-bottom">Release Date: </p>
+                        <p th:text="|Grape: ${t}|" class="card-text border-bottom "></p>
+
                     </div>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                            <a type="button" class="btn btn-sm btn-outline-secondary">Details</a>
+                            <a th:href="@{/}" type="button" class="btn btn-sm btn-outline-secondary">Browse</a>
                         </div>
                         <div class="btn-group">
                             <a type="button" class="btn btn-sm btn-outline-secondary">Delete</a>
