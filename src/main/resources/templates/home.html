@@ -25,7 +25,7 @@
                     </div>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                            <a th:href="@{/}" type="button" class="btn btn-sm btn-outline-secondary">Browse</a>
+                            <a th:href="@{/wine/browse-{type} (type = ${t})}" type="button" class="btn btn-sm btn-outline-secondary">Browse</a>
                         </div>
                         <div class="btn-group">
                             <a type="button" class="btn btn-sm btn-outline-secondary">Delete</a>
@@ -37,6 +37,5 @@
     </div>
 </main>
 <footer th:replace="fragments/commons :: footer"></footer>
-<script th:src="@{js/search-bar.js}"></script>
 </body>
 </html>

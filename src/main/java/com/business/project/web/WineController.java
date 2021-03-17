@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -51,5 +52,12 @@ public class WineController {
         this.wineService.addWine(wineServiceModel);
 
         return "redirect:/";
+    }
+
+    @GetMapping("/browse-{type}")
+    private String browse(@PathVariable String type) {
+
+        //todo continue logic with path variable to display wanted type!
+        return "browse-wine";
     }
 }
