@@ -1,5 +1,8 @@
 package com.business.project.web;
 
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -7,9 +10,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
 
     @GetMapping("/")
-    private String home() {
+    public String homePage() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        //todo add home page and implement logic for redirect at /home.
-        return "/index";
+        if (authentication instanceof AnonymousAuthenticationToken) {
+            return "index";
+        }
+
+        return "home";
     }
 }
