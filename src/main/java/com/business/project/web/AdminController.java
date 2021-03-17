@@ -61,7 +61,7 @@ public class AdminController {
 
         if (this.userService.isDemotingHimself(userServiceModel)) {
             redirectAttributes.addFlashAttribute("userCommandBindingModel",userCommandBindingModel);
-
+            redirectAttributes.addFlashAttribute("isSameUser",true);
             setAttributes(redirectAttributes);
             return "redirect:control";
         }
@@ -90,7 +90,7 @@ public class AdminController {
     }
 
     private void setAttributes(RedirectAttributes redirectAttributes) {
-        redirectAttributes.addFlashAttribute("isSameUser",true);
+
         redirectAttributes.addFlashAttribute("userFound",true);
         redirectAttributes.addFlashAttribute("successCommand",false);
     }
