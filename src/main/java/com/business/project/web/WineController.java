@@ -54,10 +54,5 @@ public class WineController {
         return "redirect:/";
     }
 
-    @GetMapping("/browse-{type}")
-    private String browse(@PathVariable String type) {
 
-        //todo continue logic with path variable to display wanted type!
-        return "browse-wine";
-    }
 }
