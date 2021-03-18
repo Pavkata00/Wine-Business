@@ -12,4 +12,6 @@ import java.util.Optional;
 public interface WineRepository extends JpaRepository<WineEntity, Long> {
 
     List<WineEntity> findAllByType(TypeEnum typeEnum);
+
+    Optional<WineEntity> findByName(String name);
 }

@@ -1,5 +1,6 @@
 package com.business.project.service.impl;
 
+import com.business.project.model.entity.ReviewEntity;
 import com.business.project.model.entity.WineEntity;
 import com.business.project.model.entity.enums.TypeEnum;
 import com.business.project.model.service.WineServiceModel;
@@ -11,6 +12,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -49,5 +51,14 @@ public class WineServiceImpl implements WineService {
             return wineViewModel;
 
         }).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ReviewEntity> getReviewsOfWine(String name) {
+
+        //todo consider exception here
+       WineEntity wineEntity = this.wineRepository.findByName(name).orElse(null);
+
+       return wineEntity.getReviews();
     }
 }

@@ -1,5 +1,6 @@
 package com.business.project.web;
 
+import com.business.project.service.ReviewService;
 import com.business.project.service.WineService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class WineTypeController {
 
     private final WineService wineService;
+    private final ReviewService reviewService;
 
-    public WineTypeController(WineService wineService) {
+    public WineTypeController(WineService wineService, ReviewService reviewService) {
         this.wineService = wineService;
+        this.reviewService = reviewService;
     }
 
     @GetMapping("/browse-{type}")
@@ -28,7 +31,9 @@ public class WineTypeController {
 
     //todo logic for these methods + html pages.
     @GetMapping("/getReviews/{name}")
-    private String getReviews(@PathVariable String name) {
+    private String getReviews(@PathVariable String name,Model model) {
+
+        model.addAttribute("reviewsOfWine",this.reviewService.getReviewsOfWine(name));
 
 
         return "review";

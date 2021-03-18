@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/commons :: head"></head>
+<body>
+<header th:replace="fragments/commons :: navigation"></header>
+<main class="p-5 align-content-center bg-blur ">
+
+    <hr class="border-bottom w-50">
+    <div class="mt-5 col-sm-12 my-auto align-self-center">
+        <input id="searchInput" class="form-control mr-sm-2 w-50" type="search"
+               placeholder="Enter album title or artist name" aria-label="Search">
+    </div>
+    <hr class="border-bottom w-75">
+    <div class="row mt-5" id="albumsList">
+
+        <div th:each="r : ${reviewsOfWine}" th:object="${r}" class="col-md-3">
+            <div class="card-body">
+                <div class="text-center">
+                    <p th:text="|Review by: *{user} on *{dateTime}|" class="card-text border-bottom "></p>
+                    <p th:text="|Rating given: *{rating}|" class="card-text border-bottom "></p>
+                    <p th:text="*{text}" class="card-text border-bottom "></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer th:replace="fragments/commons :: footer"></footer>
+</body>
+</html>
