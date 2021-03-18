@@ -21,7 +21,7 @@ public class WineEntity extends BaseEntity {
     private LocalDate madeDate;
     private TypeEnum type;
     private FactoryEntity factory;
-    // todo   private List<String> reviews = new ArrayList<>();
+    private List<ReviewEntity> reviews = new ArrayList<>();
 
     public WineEntity() {
     }
@@ -96,5 +96,15 @@ public class WineEntity extends BaseEntity {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+
+    @OneToMany
+    public List<ReviewEntity> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<ReviewEntity> reviews) {
+        this.reviews = reviews;
     }
 }

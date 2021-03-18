@@ -26,8 +26,14 @@ public class WineTypeController {
         return "browse-wine";
     }
 
+    //todo logic for these methods + html pages.
+    @GetMapping("/getReviews/{name}")
+    private String getReviews(@PathVariable String name) {
 
-    //todo logic for there two + post method for review
+
+        return "review";
+    }
+
 
     @GetMapping("/addReview/{name}")
     private String addReview(@PathVariable String name) {
