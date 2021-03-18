@@ -15,7 +15,6 @@ public class ReviewEntity extends BaseEntity {
     private int rating;
     private LocalDateTime dateTime;
     private UserEntity user;
-    private WineEntity wine;
 
     public ReviewEntity() {
     }
@@ -56,12 +55,4 @@ public class ReviewEntity extends BaseEntity {
         this.dateTime = dateTime;
     }
 
-    @ManyToOne
-    public WineEntity getWine() {
-        return wine;
-    }
-
-    public void setWine(WineEntity wine) {
-        this.wine = wine;
-    }
 }
