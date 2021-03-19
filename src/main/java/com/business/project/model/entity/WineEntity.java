@@ -99,7 +99,7 @@ public class WineEntity extends BaseEntity {
     }
 
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     public List<ReviewEntity> getReviews() {
         return reviews;
     }

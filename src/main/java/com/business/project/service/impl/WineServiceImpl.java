@@ -54,11 +54,23 @@ public class WineServiceImpl implements WineService {
     }
 
     @Override
-    public List<ReviewEntity> getReviewsOfWine(String name) {
+    public void addReviewToWine(String name, ReviewEntity reviewEntity) {
 
-        //todo consider exception here
-       WineEntity wineEntity = this.wineRepository.findByName(name).orElse(null);
+        //todo check for mistakes null pointer!
 
-       return wineEntity.getReviews();
+        WineEntity wineEntity = this.wineRepository.findByName(name).orElse(null);
+
+        wineEntity.getReviews().add(reviewEntity);
+
+        this.wineRepository.save(wineEntity);
+
     }
+
+    @Override
+    public WineEntity getWineByName(String name) {
+        //todo check throw here as well
+        return this.wineRepository.findByName(name).orElseThrow();
+    }
+
+
 }

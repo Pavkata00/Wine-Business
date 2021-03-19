@@ -1,5 +1,6 @@
 package com.business.project.service;
 
+import com.business.project.model.entity.UserEntity;
 import com.business.project.model.service.UserServiceModel;
 
 public interface UserService {
@@ -17,4 +18,6 @@ public interface UserService {
     boolean isAdmin(UserServiceModel userServiceModel);
 
     boolean isDemotingHimself(UserServiceModel userServiceModel);
+
+    UserEntity getCurrentUser();
 }
