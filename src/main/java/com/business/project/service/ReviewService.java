@@ -8,5 +8,5 @@ import java.util.List;
 public interface ReviewService {
     List<ReviewViewModel> getReviewsOfWine(String name);
 
-    void addReviewToWine(ReviewServiceModel reviewServiceModel, String name);
+    void addReviewToWine(ReviewServiceModel reviewServiceModel, String wineName);
 }

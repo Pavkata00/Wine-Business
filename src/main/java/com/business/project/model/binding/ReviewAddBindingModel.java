@@ -1,17 +1,15 @@
 package com.business.project.model.binding;
 
-import com.business.project.model.entity.UserEntity;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
 
 public class ReviewAddBindingModel {
 
-    private String text;
-    private int rating;
+    private String description;
+    private String rating;
+    private String wineName;
     private String dateTime;
     private String user;
 
@@ -20,20 +18,20 @@ public class ReviewAddBindingModel {
 
     @NotBlank(message = "You should write review.")
     @Length(min = 20,message = "Review should be at least 20 characters.")
-    public String getText() {
-        return text;
+    public String getDescription() {
+        return description;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    @NotNull(message = "You must add rating.")
-    public int getRating() {
+    @NotBlank(message = "You must add rating.")
+    public String getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(String rating) {
         this.rating = rating;
     }
 
@@ -51,5 +49,14 @@ public class ReviewAddBindingModel {
 
     public void setUser(String user) {
         this.user = user;
+    }
+
+    @NotBlank(message = "You must select which wine you are making review of.")
+    public String getWineName() {
+        return wineName;
+    }
+
+    public void setWineName(String wineName) {
+        this.wineName = wineName;
     }
 }

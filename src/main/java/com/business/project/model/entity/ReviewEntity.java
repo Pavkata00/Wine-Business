@@ -11,21 +11,21 @@ import java.time.LocalDateTime;
 @Table(name = "reviews")
 public class ReviewEntity extends BaseEntity {
 
-    private String text;
-    private int rating;
+    private String description;
+    private String rating;
     private LocalDateTime dateTime;
     private UserEntity user;
 
     public ReviewEntity() {
     }
 
-    @Column(name = "text",columnDefinition = "TEXT",nullable = false)
-    public String getText() {
-        return text;
+    @Column(name = "description",columnDefinition = "TEXT",nullable = false)
+    public String getDescription() {
+        return description;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @ManyToOne
@@ -38,11 +38,11 @@ public class ReviewEntity extends BaseEntity {
     }
 
     @Column(name = "rating",nullable = false)
-    public int getRating() {
+    public String getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(String rating) {
         this.rating = rating;
     }
 

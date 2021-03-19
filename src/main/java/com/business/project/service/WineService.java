@@ -16,8 +16,10 @@ public interface WineService {
     List<WineViewModel> getWinesByType(String type);
 
 
-    void addReviewToWine(String name, ReviewEntity reviewEntity);
+    void addReviewToWine(ReviewEntity reviewEntity, String wineName);
 
 
     WineEntity getWineByName(String name);
+
+    List<WineViewModel> getAllWines();
 }

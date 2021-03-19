@@ -18,14 +18,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/winesType")
-public class WineTypeController {
+@RequestMapping("/reviews")
+public class ReviewController {
 
     private final ModelMapper modelMapper;
     private final WineService wineService;
     private final ReviewService reviewService;
 
-    public WineTypeController(ModelMapper modelMapper, WineService wineService, ReviewService reviewService) {
+    public ReviewController(ModelMapper modelMapper, WineService wineService, ReviewService reviewService) {
         this.modelMapper = modelMapper;
         this.wineService = wineService;
         this.reviewService = reviewService;
@@ -40,6 +40,38 @@ public class WineTypeController {
     }
 
     //todo logic for these methods + html pages.
+
+    @GetMapping("/addReview")
+    private String addReview(Model model) {
+
+        if (!model.containsAttribute("reviewAddBindingModel")) {
+            model.addAttribute("reviewAddBindingModel", new ReviewAddBindingModel());
+            model.addAttribute("allWines",this.wineService.getAllWines());
+
+        }
+        return "add-review";
+    }
+
+    @PostMapping("/addReview")
+    private String addReviewConfirm(@Valid ReviewAddBindingModel reviewAddBindingModel,
+                                    BindingResult bindingResult,
+                                    RedirectAttributes redirectAttributes) {
+
+        if (bindingResult.hasErrors()) {
+
+            redirectAttributes.addFlashAttribute("reviewAddBindingModel",reviewAddBindingModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.reviewAddBindingModel",bindingResult);
+            redirectAttributes.addFlashAttribute("allWines", this.wineService.getAllWines());
+
+            return "redirect:addReview";
+        }
+
+        ReviewServiceModel reviewServiceModel = this.modelMapper.map(reviewAddBindingModel,ReviewServiceModel.class);
+        this.reviewService.addReviewToWine(reviewServiceModel,reviewAddBindingModel.getWineName());
+
+        return "redirect:/";
+    }
+
     @GetMapping("/getReviews-{name}")
     private String getReviews(@PathVariable String name,Model model) {
 
@@ -48,45 +80,6 @@ public class WineTypeController {
 
         return "review";
     }
-
-
-    @GetMapping("/addReview-{name}")
-    private String addReview(@PathVariable String name,Model model) {
-
-        if (!model.containsAttribute("reviewAddBindingModel")) {
-            model.addAttribute("reviewAddBindingModel", new ReviewAddBindingModel());
-            model.addAttribute("nameOfWine",name);
-        }
-        return "add-review";
-    }
-
-    @PostMapping("/addReview-{name}")
-    private String addReviewConfirm(@Valid ReviewAddBindingModel reviewAddBindingModel,
-                                    BindingResult bindingResult,
-                                    RedirectAttributes redirectAttributes,
-                                    @PathVariable String name) {
-
-        if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("reviewAddBindingModel",reviewAddBindingModel);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.reviewAddBindingModel",bindingResult);
-
-            //todo fix the bug with validation errors and path /
-            return "redirect:/winesType/addReview-" + name;
-        }
-
-        ReviewServiceModel reviewServiceModel = this.modelMapper.map(reviewAddBindingModel,ReviewServiceModel.class);
-        this.reviewService.addReviewToWine(reviewServiceModel,name);
-
-        return "redirect:/winesType/getReviews-"+name;
-    }
-
-
-
-
-
-
-
-
 
     @PostMapping("/deleteOne/{name}")
     private String deleteOne(@PathVariable String name) {

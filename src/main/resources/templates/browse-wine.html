@@ -49,13 +49,10 @@
                 </div>
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                        <a th:href="@{/winesType/addReview-{name} (name = *{name})}" type="button" class="btn btn-sm btn-outline-secondary">Add review</a>
+                        <a th:href="@{/reviews/deleteOne/{name} (name = *{name})}" type="button" class="btn btn-sm btn-outline-secondary">Buy one</a>
                     </div>
                     <div class="btn-group">
-                        <a th:href="@{/winesType/deleteOne/{name} (name = *{name})}" type="button" class="btn btn-sm btn-outline-secondary">Buy one</a>
-                    </div>
-                    <div class="btn-group">
-                        <a th:href="@{/winesType/getReviews-{name} (name = *{name})}" type="button" class="btn btn-sm btn-outline-secondary">See reviews</a>
+                        <a th:href="@{/reviews/getReviews-{name} (name = *{name})}" type="button" class="btn btn-sm btn-outline-secondary">See reviews</a>
                     </div>
                 </div>
             </div>

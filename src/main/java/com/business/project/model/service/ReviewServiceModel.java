@@ -2,7 +2,7 @@ package com.business.project.model.service;
 
 public class ReviewServiceModel {
 
-    private String text;
+    private String description;
     private int rating;
     private String dateTime;
     private String user;
@@ -10,12 +10,12 @@ public class ReviewServiceModel {
     public ReviewServiceModel() {
     }
 
-    public String getText() {
-        return text;
+    public String getDescription() {
+        return description;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getRating() {

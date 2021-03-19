@@ -41,13 +41,13 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public void addReviewToWine(ReviewServiceModel reviewServiceModel, String name) {
+    public void addReviewToWine(ReviewServiceModel reviewServiceModel, String wineName) {
         ReviewEntity reviewEntity = this.modelMapper.map(reviewServiceModel,ReviewEntity.class);
         reviewEntity.setDateTime(LocalDateTime.now());
         reviewEntity.setUser(this.userService.getCurrentUser());
 
         this.reviewRepository.save(reviewEntity);
 
-        this.wineService.addReviewToWine(name,reviewEntity);
+        this.wineService.addReviewToWine(reviewEntity, wineName);
     }
 }

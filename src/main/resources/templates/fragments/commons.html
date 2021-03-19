@@ -50,7 +50,7 @@
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a sec:authorize="isAuthenticated()" class="nav-link text-white active h5" href="/articles/all">All wines</a>
+                    <a sec:authorize="isAuthenticated()" class="nav-link text-white active h5" th:href="@{/reviews/addReview}">Add Review</a>
                 </li>
                 <li sec:authorize="isAuthenticated()" class="nav-item">
                     <form th:action="@{/logout}" method="POST">

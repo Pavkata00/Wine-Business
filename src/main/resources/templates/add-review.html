@@ -13,28 +13,26 @@
         </div>
         <div class="row g-3 align-items-center">
             <form
-                    th:action="@{/winesType/addReview-{name} (name = ${nameOfWine})}" th:object="${reviewAddBindingModel}"
+                    th:action="@{/reviews/addReview}" th:object="${reviewAddBindingModel}"
                     method="POST">
-                <div>
-                    <div class="col-auto">
-                        <label for="inputText" class="col-form-label text-light">Text</label>
-                    </div>
-                    <div class="col-auto">
-                        <input type="text"
-                               th:field="*{text}" th:errorclass="is-invalid"
-                               name="text"
-                               id="inputText"
-                               class="form-control"
-                               aria-describedby="usernameHelpInline">
-                        <small th:if="${#fields.hasErrors('text')}" th:errors="*{text}" id="fullNameError"
-                               class="invalid-feedback text-light form-text bg-danger rounded"></small>
+                <div class="form-row m-5">
+                    <div class="col">
+                        <label for="wineName" class="col-form-label text-light">Wine name</label>
+                        <select id="wineName" name="wineName" class="custom-select">
+                            <option value="" selected>Select wine</option>
+                            <option th:each="w : ${allWines}" th:object="${w}"
+                                    th:value="*{name}" th:text="*{name}">1</option>
+                        </select>
+                        <small th:if="${#fields.hasErrors('wineName')}" th:errors="*{wineName}" id="wineError" class="form-text bg-danger rounded"></small>
                     </div>
                 </div>
                 <div class="form-row m-5">
                     <div class="col">
-                        <label for="rating">Rating</label>
+
+<!--                        todo consider fixing value bug-->
+                        <label for="rating" class="col-form-label text-light">Rating</label>
                         <select id="rating" name="rating" class="custom-select">
-                            <option value="" selected>Select rating 1 - 5</option>
+                            <option value="" selected></option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -43,8 +41,17 @@
                         </select>
                         <small th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}" id="factoryError" class="form-text bg-danger rounded"></small>
                     </div>
+                </div>
+                <div class="form-row m-5">
+                    <div class="col">
+                        <label for="description" class="col-form-label text-light">Description</label>
+                        <textarea id="description" th:field="*{description}" th:errorclass="is-invalid" type="text" class="form-control" placeholder="Description"></textarea>
+                        <small th:if="${#fields.hasErrors('description')}" th:errors="*{description}" id="descriptionError" class="form-text bg-danger rounded"></small>
+                    </div>
+                </div>
+
                 <div class="d-flex justify-content-center mt-2">
-                    <button class="btn btn-primary btn-block w-50" type="submit">Add review</button>
+                    <button type="submit" class="btn btn-info">Add review</button>
                 </div>
             </form>
         </div>

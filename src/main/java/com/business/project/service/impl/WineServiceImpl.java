@@ -54,15 +54,14 @@ public class WineServiceImpl implements WineService {
     }
 
     @Override
-    public void addReviewToWine(String name, ReviewEntity reviewEntity) {
+    public void addReviewToWine(ReviewEntity reviewEntity, String wineName) {
 
-        //todo check for mistakes null pointer!
-
-        WineEntity wineEntity = this.wineRepository.findByName(name).orElse(null);
-
+        //todo check for throw
+        WineEntity wineEntity = this.wineRepository.findByName(wineName).orElseThrow();
         wineEntity.getReviews().add(reviewEntity);
 
         this.wineRepository.save(wineEntity);
+
 
     }
 
@@ -70,6 +69,11 @@ public class WineServiceImpl implements WineService {
     public WineEntity getWineByName(String name) {
         //todo check throw here as well
         return this.wineRepository.findByName(name).orElseThrow();
+    }
+
+    @Override
+    public List<WineViewModel> getAllWines() {
+        return this.wineRepository.findAll().stream().map(wineEntity -> this.modelMapper.map(wineEntity,WineViewModel.class)).collect(Collectors.toList());
     }
 
 

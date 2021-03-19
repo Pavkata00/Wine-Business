@@ -1,32 +1,28 @@
 package com.business.project.model.view;
 
-import com.business.project.model.entity.UserEntity;
-
-import java.time.LocalDateTime;
-
 public class ReviewViewModel {
 
-    private String text;
-    private int rating;
+    private String description;
+    private String rating;
     private String dateTime;
     private String user;
 
     public ReviewViewModel() {
     }
 
-    public String getText() {
-        return text;
+    public String getDescription() {
+        return description;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public int getRating() {
+    public String getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(String rating) {
         this.rating = rating;
     }
 
