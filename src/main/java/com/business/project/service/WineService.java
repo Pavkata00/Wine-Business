@@ -6,12 +6,13 @@ import com.business.project.model.service.WineServiceModel;
 import com.business.project.model.view.ReviewViewModel;
 import com.business.project.model.view.WineViewModel;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
 public interface WineService {
-    void addWine(WineServiceModel wineServiceModel);
+    void addWine(WineServiceModel wineServiceModel) throws IOException;
 
     List<WineViewModel> getWinesByType(String type);
 

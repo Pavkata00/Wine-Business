@@ -1,12 +1,9 @@
 package com.business.project.model.binding;
 
-import com.business.project.model.entity.FactoryEntity;
-import com.business.project.model.entity.enums.TypeEnum;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -15,7 +12,7 @@ public class WineAddBindingModel {
 
     private String name;
     private String description;
-    private String imageUrl;
+    private MultipartFile img;
     private BigDecimal price;
     private int amount;
     private LocalDate madeDate;
@@ -41,17 +38,6 @@ public class WineAddBindingModel {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    @NotNull
-    @Length(min = 5, message = "Image length must be at least 5 characters!")
-    //todo consider adding regex
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
     }
 
     @NotNull(message = "You must write price!")
@@ -102,5 +88,13 @@ public class WineAddBindingModel {
 
     public void setFactory(String factory) {
         this.factory = factory;
+    }
+
+    public MultipartFile getImg() {
+        return img;
+    }
+
+    public void setImg(MultipartFile img) {
+        this.img = img;
     }
 }

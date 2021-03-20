@@ -1,7 +1,6 @@
 package com.business.project.model.service;
 
-import com.business.project.model.entity.FactoryEntity;
-import com.business.project.model.entity.enums.TypeEnum;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -10,7 +9,7 @@ public class WineServiceModel {
 
     private String name;
     private String description;
-    private String imageUrl;
+    private MultipartFile img;
     private BigDecimal price;
     private int amount;
     private LocalDate madeDate;
@@ -34,14 +33,6 @@ public class WineServiceModel {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
     }
 
     public BigDecimal getPrice() {
@@ -82,5 +73,13 @@ public class WineServiceModel {
 
     public void setFactory(String factory) {
         this.factory = factory;
+    }
+
+    public MultipartFile getImg() {
+        return img;
+    }
+
+    public void setImg(MultipartFile img) {
+        this.img = img;
     }
 }

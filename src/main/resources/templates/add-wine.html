@@ -7,7 +7,7 @@
 <main class="p-5 bg-blur text-center">
     <h1 class="text-light border-bottom">Add wine for the customers.</h1>
     <div class="d-flex justify-content-center">
-        <form th:action="@{/wine/add}" method="POST" th:object="${wineAddBindingModel}"
+        <form th:action="@{/wine/add}" method="POST" enctype="multipart/form-data" th:object="${wineAddBindingModel}"
               class="text-light">
             <div class="form-row m-5">
                 <div class="col">
@@ -15,10 +15,9 @@
                     <input id="name" th:field="*{name}" th:errorclass="is-invalid" type="text" class="form-control" placeholder="Wine name">
                     <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}" id="nameError" class="form-text bg-danger rounded"></small>
                 </div>
-                <div class="col">
-                    <label for="imageUrl">Image Url</label>
-                    <input id="imageUrl" th:field="*{imageUrl}" th:errorclass="is-invalid" type="text" class="form-control" placeholder="Image Url">
-                    <small th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}" id="imageUrlError" class="form-text bg-danger rounded"></small>
+                <div class="form-group">
+                    <label for="add-title-image" class="font-weight-bold">Picture</label>
+                    <input type="file" class="form-control-file" id="add-title-image" name="img" required="required">
                 </div>
             </div>
             <div class="form-row m-5">

@@ -32,6 +32,8 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().
                 antMatchers("/js/**", "/css/**", "/img/**").permitAll().
                 antMatchers("/","/users/register","/users/login").permitAll().
+                antMatchers("/admin/**").hasRole("ADMIN").
+                antMatchers("/wine/**").hasRole("ADMIN").
                 antMatchers("/**").authenticated().
                     and().
                 formLogin().
