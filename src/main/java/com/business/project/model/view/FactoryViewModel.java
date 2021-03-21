@@ -1,22 +1,14 @@
-package com.business.project.model.entity;
+package com.business.project.model.view;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "factories")
-public class FactoryEntity extends BaseEntity {
+public class FactoryViewModel {
 
     private String name;
     private int foundedYear;
     private String description;
 
-
-    public FactoryEntity() {
+    public FactoryViewModel() {
     }
 
-    @Column(name = "name",nullable = false,unique = true)
     public String getName() {
         return name;
     }
@@ -25,7 +17,6 @@ public class FactoryEntity extends BaseEntity {
         this.name = name;
     }
 
-    @Column(name = "year_founded")
     public int getFoundedYear() {
         return foundedYear;
     }
@@ -34,7 +25,6 @@ public class FactoryEntity extends BaseEntity {
         this.foundedYear = foundedYear;
     }
 
-    @Column(name = "description",columnDefinition = "TEXT")
     public String getDescription() {
         return description;
     }
