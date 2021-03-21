@@ -39,8 +39,6 @@ public class ReviewController {
         return "browse-wine";
     }
 
-    //todo logic for these methods + html pages.
-
     @GetMapping("/addReview")
     private String addReview(Model model) {
 

@@ -41,8 +41,4 @@ body {
 .carousel-item img {
     height: 500px;
 }
-/*todo consider removing*/
-#all-articles-jumbotron {
-    background-image: url("/img/instruments.jpg");
-    background-position: center;
-}
+

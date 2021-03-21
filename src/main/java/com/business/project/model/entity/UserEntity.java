@@ -14,7 +14,6 @@ public class UserEntity extends BaseEntity {
     private String fullName;
     private List<RoleEntity> roles = new ArrayList<>();
 
-    //todo consider adding gender/age etc.
 
 
     public UserEntity() {

@@ -65,7 +65,7 @@ public class WineServiceImpl implements WineService {
     @Override
     public void addReviewToWine(ReviewEntity reviewEntity, String wineName) {
 
-        //todo check for throw
+        //todo throw exception
         WineEntity wineEntity = this.wineRepository.findByName(wineName).orElseThrow();
         wineEntity.getReviews().add(reviewEntity);
 
@@ -76,7 +76,7 @@ public class WineServiceImpl implements WineService {
 
     @Override
     public WineEntity getWineByName(String name) {
-        //todo check throw here as well
+        //todo throw exception
         return this.wineRepository.findByName(name).orElseThrow();
     }
 
