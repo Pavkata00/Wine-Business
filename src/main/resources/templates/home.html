@@ -5,12 +5,10 @@
 <header th:replace="fragments/commons :: navigation"></header>
 <main class="p-5 align-content-center bg-blur ">
 
-    <hr class="border-bottom w-50">
-    <div class="mt-5 col-sm-12 my-auto align-self-center">
-        <input id="searchInput" class="form-control mr-sm-2 w-50" type="search"
-               placeholder="Enter album title or artist name" aria-label="Search">
-    </div>
-    <hr class="border-bottom w-75">
+    <h2 class="text-light border-center pl-2">Choose and browse one of our four unique wine types!</h2>
+
+    <hr class="border-bottom w-125">
+
     <div class="row mt-5" id="albumsList">
 
         <div th:each="t : ${T(com.business.project.model.entity.enums.TypeEnum).values()}" th:object="${t}" class="col-md-3">
@@ -26,9 +24,6 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
                             <a th:href="@{/reviews/browse-{type} (type = ${t})}" type="button" class="btn btn-sm btn-outline-secondary">Browse</a>
-                        </div>
-                        <div class="btn-group">
-                            <a type="button" class="btn btn-sm btn-outline-secondary">Delete</a>
                         </div>
                     </div>
                 </div>

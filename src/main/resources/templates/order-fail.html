@@ -1,0 +1,41 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/commons :: head"></head>
+<style>
+    h1 {
+        color: #88B04B;
+        font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+        font-weight: 900;
+        font-size: 40px;
+        margin-bottom: 10px;
+    }
+    .jumbotron{
+        color: #FFFFFF;
+        background-color:rebeccapurple;
+    }
+    .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+    }
+
+</style>
+<body>
+<header th:replace="fragments/commons::navigation"></header>
+<div class="jumbotron text-center">
+    <h1 class="display-3">Out of stock!</h1>
+
+    <p class="lead">We are sorry to inform you that this wine is not available. You can choose one of our other wines.</p>
+    <hr>
+    <p class="lead">
+        <a class="btn btn-primary btn-sm" th:href="@{/}" role="button">Choose another wine</a>
+    </p>
+</div>
+<div class="center">
+    <img alt="Login image" src="/img/purchaseFail.jpg" class="center">
+</div>
+</body>
+
+<footer th:replace="fragments/commons :: footer"></footer>
+
+</html>
