@@ -23,4 +23,6 @@ public interface WineService {
     WineEntity getWineByName(String name);
 
     List<WineViewModel> getAllWines();
+
+    void buyWine(String name);
 }

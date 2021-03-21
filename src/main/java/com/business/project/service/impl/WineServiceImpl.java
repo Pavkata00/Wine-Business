@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -82,6 +83,17 @@ public class WineServiceImpl implements WineService {
     @Override
     public List<WineViewModel> getAllWines() {
         return this.wineRepository.findAll().stream().map(wineEntity -> this.modelMapper.map(wineEntity,WineViewModel.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public void buyWine(String name) {
+        //todo exception
+        Optional<WineEntity> wine = this.wineRepository.findByName(name);
+
+        if (wine.isPresent() && wine.get().getAmount()>=1) {
+            wine.get().setAmount(wine.get().getAmount()-1);
+            this.wineRepository.save(wine.get());
+        }
     }
 
 

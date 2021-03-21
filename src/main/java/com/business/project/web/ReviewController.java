@@ -81,9 +81,15 @@ public class ReviewController {
         return "review";
     }
 
-    @PostMapping("/deleteOne/{name}")
+    @GetMapping("/buyOne/{name}")
     private String deleteOne(@PathVariable String name) {
 
-        return "order-complete";
+        if (this.wineService.getWineByName(name).getAmount()>=1) {
+            this.wineService.buyWine(name);
+            return "order-success";
+        }
+        else {
+            return "order-fail";
+        }
     }
 }
