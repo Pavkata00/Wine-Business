@@ -41,7 +41,7 @@ public class WineAddBindingModel {
     }
 
     @NotNull(message = "You must write price!")
-    @DecimalMin(value = "1", message = "Price should be at least 12lv. You don't sell cheap wine!")
+    @DecimalMin(value = "12", message = "Price should be at least 12lv. You don't sell cheap wine!")
     public BigDecimal getPrice() {
         return price;
     }

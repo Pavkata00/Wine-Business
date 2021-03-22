@@ -10,6 +10,7 @@ import com.business.project.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -44,7 +45,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean usernameExists(UserServiceModel userServiceModel) {
-        UserEntity userEntity = this.userRepository.findByUsername(userServiceModel.getUsername()).orElse(null);
+        UserEntity userEntity = this.userRepository.findByUsername(userServiceModel.getUsername())
+                .orElseThrow(() -> new UsernameNotFoundException("Something happened! This user does not exist!"));
 
         if (userEntity==null) {
             return false;
@@ -55,7 +57,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean emailExists(UserServiceModel userServiceModel) {
-        UserEntity userEntity = this.userRepository.findByEmail(userServiceModel.getEmail()).orElse(null);
+        UserEntity userEntity = this.userRepository.findByEmail(userServiceModel.getEmail())
+                .orElseThrow(() -> new UsernameNotFoundException("Something happened! The use with this email does not exist!"));
         if (userEntity==null) {
             return false;
         } else {
@@ -90,7 +93,9 @@ public class UserServiceImpl implements UserService {
 
         RoleEntity roleEntityUser = this.roleService.getUserRole();
 
-        UserEntity userEntity = this.userRepository.findByUsername(userServiceModel.getUsername()).get();
+        UserEntity userEntity = this.userRepository.findByUsername(userServiceModel.getUsername())
+                .orElseThrow(() -> new UsernameNotFoundException("Something happened! This user does not exist!"));
+
         if (command.equals("Promote")) {
             userEntity.setRoles(List.of(roleEntityAdmin,roleEntityUser));
 
@@ -103,7 +108,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isAdmin(UserServiceModel userServiceModel) {
-        UserEntity userEntity = this.userRepository.findByUsername(userServiceModel.getUsername()).orElse(null);
+        UserEntity userEntity = this.userRepository.findByUsername(userServiceModel.getUsername())
+                .orElseThrow(() -> new UsernameNotFoundException("Something happened! This user does not exist!"));
 
         return userEntity.getRoles().size()==2;
     }
@@ -135,6 +141,7 @@ public class UserServiceImpl implements UserService {
             username = principal.toString();
         }
 
-        return this.userRepository.findByUsername(username).orElseThrow();
+        return this.userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Something happened! This user does not exist!"));
     }
 }

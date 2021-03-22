@@ -1,5 +1,6 @@
 package com.business.project.service.impl;
 
+import com.business.project.exception.WineNotFoundException;
 import com.business.project.model.entity.ReviewEntity;
 import com.business.project.model.entity.WineEntity;
 import com.business.project.model.entity.enums.TypeEnum;
@@ -65,35 +66,35 @@ public class WineServiceImpl implements WineService {
     @Override
     public void addReviewToWine(ReviewEntity reviewEntity, String wineName) {
 
-        //todo throw exception
-        WineEntity wineEntity = this.wineRepository.findByName(wineName).orElseThrow();
+        WineEntity wineEntity = this.wineRepository.findByName(wineName)
+                .orElseThrow(() -> new WineNotFoundException("This wine does not exist in the database!"));
+
         wineEntity.getReviews().add(reviewEntity);
 
         this.wineRepository.save(wineEntity);
-
 
     }
 
     @Override
     public WineEntity getWineByName(String name) {
-        //todo throw exception
-        return this.wineRepository.findByName(name).orElseThrow();
+        return this.wineRepository.findByName(name)
+                .orElseThrow(() -> new WineNotFoundException("This wine does not exist in the database!"));
     }
 
     @Override
     public List<WineViewModel> getAllWines() {
-        return this.wineRepository.findAll().stream().map(wineEntity -> this.modelMapper.map(wineEntity,WineViewModel.class)).collect(Collectors.toList());
+        return this.wineRepository.findAll().stream()
+                .map(wineEntity -> this.modelMapper.map(wineEntity,WineViewModel.class)).collect(Collectors.toList());
     }
 
     @Override
     public void buyWine(String name) {
-        //todo exception
-        Optional<WineEntity> wine = this.wineRepository.findByName(name);
+        WineEntity wine = this.wineRepository.findByName(name)
+                .orElseThrow(() -> new WineNotFoundException("This wine does not exist in the database!"));
 
-        if (wine.isPresent() && wine.get().getAmount()>=1) {
-            wine.get().setAmount(wine.get().getAmount()-1);
-            this.wineRepository.save(wine.get());
-        }
+            wine.setAmount(wine.getAmount()-1);
+            this.wineRepository.save(wine);
+
     }
 
 

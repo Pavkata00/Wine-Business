@@ -21,6 +21,7 @@
                     <div class="carousel-item">
                         <img class="d-block w-100 rounded" th:src="@{/img/factoryThree.jpg}" alt="Third slide">
                     </div>
+
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -34,6 +35,23 @@
         </div>
 
     <hr class="border-bottom w-150">
+<!--    <div th:each="r : ${allFactories}" th:object="${r}" class="row rounded mb-5 mt-3">-->
+<!--        <div  class="col-md-6 bg-blur text-light rounded ">-->
+<!--            <dl class="row pt-3">-->
+<!--                <dt class="col-sm-3">Review by: </dt>-->
+<!--                <dd class="col-sm-9" th:text="*{name}">Name</dd>-->
+
+<!--                <dt class="col-sm-3">Date of review: </dt>-->
+<!--                <dd class="col-sm-9" th:text="*{foundedYear}">Release Date-->
+<!--                </dd>-->
+
+
+<!--                <dt class="col-sm-3">Description</dt>-->
+<!--                <dd class="col-sm-9" th:text="*{description}">Description-->
+<!--                </dd>-->
+<!--            </dl>-->
+<!--        </div>-->
+<!--    </div>-->
 
     <div th:each="f : ${allFactories}" th:object="${f}" class="col-md-4 align-content-lg-end">
         <div class="card mb-4 box-shadow">

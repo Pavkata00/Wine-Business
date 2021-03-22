@@ -1,10 +1,12 @@
 package com.business.project.service.impl;
 
+import com.business.project.exception.FactoryNotFoundException;
 import com.business.project.model.entity.FactoryEntity;
 import com.business.project.model.view.FactoryViewModel;
 import com.business.project.repository.FactoryRepository;
 import com.business.project.service.FactoryService;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -48,7 +50,8 @@ public class FactoryServiceImpl implements FactoryService {
 
     @Override
     public FactoryEntity getFactoryByName(String factory) {
-        return this.factoryRepository.findByName(factory).orElse(null);
+        return this.factoryRepository.findByName(factory)
+                .orElseThrow(() -> new FactoryNotFoundException("Something happened! This factory does not exist!"));
     }
 
     @Override
