@@ -4,23 +4,29 @@
 <body>
 <header th:replace="fragments/commons :: navigation"></header>
 <main class="p-5 align-content-center bg-blur ">
-
-    <hr class="border-bottom w-50">
-    <div class="mt-5 col-sm-12 my-auto align-self-center">
-        <input id="searchInput" class="form-control mr-sm-2 w-50" type="search"
-               placeholder="Enter album title or artist name" aria-label="Search">
+    <div class="justify-content-center">
+        <h1 class="text-light border-left border-white pl-4">Reviews</h1>
     </div>
-    <hr class="border-bottom w-75">
-    <div class="row mt-5" id="albumsList">
+    <div th:each="r : ${reviewsOfWine}" th:object="${r}" class="row rounded mb-5 mt-3">
+        <div  class="col-md-6 bg-blur text-light rounded ">
+            <dl class="row pt-3">
+                <dt class="col-sm-3">Review by: </dt>
+                <dd class="col-sm-9" th:text="*{user}">Name</dd>
 
-        <div th:each="r : ${reviewsOfWine}" th:object="${r}" class="col-md-3">
-            <div class="card-body">
-                <div class="text-center">
-                    <p th:text="|Review by: *{user} on *{dateTime}|" class="card-text border-bottom "></p>
-                    <p th:text="|Rating given: *{rating}|" class="card-text border-bottom "></p>
-                    <p th:text="*{description}" class="card-text border-bottom "></p>
-                </div>
-            </div>
+                <dt class="col-sm-3">Date of review: </dt>
+                <dd class="col-sm-9" th:text="*{dateTime}">Release Date
+                </dd>
+
+                <dt class="col-sm-3">Rating give:</dt>
+                <dd class="col-sm-9" th:text="*{rating}">Artist
+                </dd>
+
+                <dt class="col-sm-3">Description</dt>
+                <dd class="col-sm-9" th:text="*{description}">Description
+                </dd>
+
+
+            </dl>
         </div>
     </div>
 </main>
