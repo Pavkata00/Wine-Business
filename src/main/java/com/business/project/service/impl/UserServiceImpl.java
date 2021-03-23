@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean usernameExists(UserServiceModel userServiceModel) {
         UserEntity userEntity = this.userRepository.findByUsername(userServiceModel.getUsername())
-                .orElseThrow(() -> new UsernameNotFoundException("Something happened! This user does not exist!"));
+                .orElse(null);
 
         if (userEntity==null) {
             return false;
@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean emailExists(UserServiceModel userServiceModel) {
         UserEntity userEntity = this.userRepository.findByEmail(userServiceModel.getEmail())
-                .orElseThrow(() -> new UsernameNotFoundException("Something happened! The use with this email does not exist!"));
+                .orElse(null);
         if (userEntity==null) {
             return false;
         } else {

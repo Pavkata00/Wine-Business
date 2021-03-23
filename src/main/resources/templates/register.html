@@ -28,8 +28,7 @@
                                class="invalid-feedback text-light form-text bg-danger rounded"></small>
                         <small th:if="${usernameExists}" id="usernameUniqueError"
                                class="text-light form-text bg-danger rounded">Username is already occupied!</small>
-                        <small th:if="${emailExists}" id="emailUniqueError"
-                               class="text-light form-text bg-danger rounded">Email is already occupied!</small>
+
                     </div>
                 </div>
                 <div>
@@ -45,6 +44,8 @@
                                aria-describedby="fullNameHelpInline">
                         <small th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}" id="fullNameError"
                              class="invalid-feedback text-light form-text bg-danger rounded"></small>
+                        <small th:if="${emailExists}" id="emailUniqueError"
+                               class="text-light form-text bg-danger rounded">Email is already occupied!</small>
                     </div>
                 </div>
                 <div>
