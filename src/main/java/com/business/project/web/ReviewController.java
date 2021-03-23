@@ -40,7 +40,7 @@ public class ReviewController {
     }
 
     @GetMapping("/addReview")
-    private String addReview(Model model) {
+    public String addReview(Model model) {
 
         if (!model.containsAttribute("reviewAddBindingModel")) {
             model.addAttribute("reviewAddBindingModel", new ReviewAddBindingModel());
@@ -51,7 +51,7 @@ public class ReviewController {
     }
 
     @PostMapping("/addReview")
-    private String addReviewConfirm(@Valid ReviewAddBindingModel reviewAddBindingModel,
+    public String addReviewConfirm(@Valid ReviewAddBindingModel reviewAddBindingModel,
                                     BindingResult bindingResult,
                                     RedirectAttributes redirectAttributes) {
 
@@ -71,7 +71,7 @@ public class ReviewController {
     }
 
     @GetMapping("/getReviews-{name}")
-    private String getReviews(@PathVariable String name,Model model) {
+    public String getReviews(@PathVariable String name,Model model) {
 
         model.addAttribute("reviewsOfWine",this.reviewService.getReviewsOfWine(name));
 
@@ -80,7 +80,7 @@ public class ReviewController {
     }
 
     @GetMapping("/buyOne/{name}")
-    private String deleteOne(@PathVariable String name) {
+    public String buyOne(@PathVariable String name) {
 
         if (this.wineService.getWineByName(name).getAmount()>=1) {
             this.wineService.buyWine(name);
