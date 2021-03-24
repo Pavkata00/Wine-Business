@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("/reviews")
@@ -32,9 +33,9 @@ public class ReviewController {
     }
 
     @GetMapping("/browse-{type}")
-    private String browse(@PathVariable String type, Model model) {
+    public String browse(@PathVariable String type, Model model) {
 
-        model.addAttribute("typeWines", this.wineService.getWinesByType(type));
+        model.addAttribute("typeWines", wineService.getWinesByType(type));
 
         return "browse-wine";
     }
@@ -73,7 +74,8 @@ public class ReviewController {
     @GetMapping("/getReviews-{name}")
     public String getReviews(@PathVariable String name,Model model) {
 
-        model.addAttribute("reviewsOfWine",this.reviewService.getReviewsOfWine(name));
+        List<ReviewViewModel> reviewsOfWine = this.reviewService.getReviewsOfWine(name);
+        model.addAttribute("reviewsOfWine", reviewsOfWine);
 
 
         return "review";
@@ -82,8 +84,8 @@ public class ReviewController {
     @GetMapping("/buyOne/{name}")
     public String buyOne(@PathVariable String name) {
 
-        if (this.wineService.getWineByName(name).getAmount()>=1) {
-            this.wineService.buyWine(name);
+        if (wineService.getWineByName(name).getAmount()>=1) {
+            wineService.buyWine(name);
             return "order-success";
         }
         else {

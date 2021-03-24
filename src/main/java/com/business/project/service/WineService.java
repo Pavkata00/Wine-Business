@@ -25,4 +25,6 @@ public interface WineService {
     List<WineViewModel> getAllWines();
 
     void buyWine(String name);
+
+    WineServiceModel getWineById(Long wineId);
 }

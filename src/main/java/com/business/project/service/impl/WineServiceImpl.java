@@ -97,5 +97,11 @@ public class WineServiceImpl implements WineService {
 
     }
 
+    @Override
+    public WineServiceModel getWineById(Long wineId) {
+        WineEntity wineEntity = this.wineRepository.findById(wineId).orElseThrow(() -> new WineNotFoundException("Wine with that id does not exist!"));
+        return this.modelMapper.map(wineEntity,WineServiceModel.class);
+    }
+
 
 }

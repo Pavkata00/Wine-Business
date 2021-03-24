@@ -1,6 +1,6 @@
 package com.business.project.aop;
 
-import com.business.project.repository.LogService;
+import com.business.project.service.LogService;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -17,18 +17,35 @@ public class LogInformationAspect {
         this.logService = logService;
     }
 
-    @Pointcut("execution(* com.business.project.web.ReviewController.buyOne())")
-    public void buyOnePointcut() {}
+    @Pointcut("execution(* com.business.project.web.ReviewController.getReviews(..))")
+    public void getReviewsPointcut() {}
 
-    @After("buyOnePointcut()")
+    @After("getReviewsPointcut()")
     public void afterAdvice(JoinPoint joinPoint) {
 
         Object[] info = joinPoint.getArgs();
-        Long winId = (Long) info[0];
+
+        String wineName = (String) info[0];
 
         String action = joinPoint.getSignature().getName();
 
-        this.logService.createLog(action, winId);
+        this.logService.createLog(action, wineName);
+    }
+
+
+    @Pointcut("execution(* com.business.project.web.ReviewController.buyOne(..))")
+    public void buyOnePointcut() {}
+
+    @After("buyOnePointcut()")
+    public void afterAdviceTwo(JoinPoint joinPoint) {
+
+        Object[] info = joinPoint.getArgs();
+
+        String wineName = (String) info[0];
+
+        String action = joinPoint.getSignature().getName();
+
+        this.logService.createLog(action, wineName);
     }
 
 }
