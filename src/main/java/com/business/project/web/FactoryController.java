@@ -18,7 +18,9 @@ public class FactoryController {
 
     @GetMapping("/view")
     private String view(Model model) {
-        model.addAttribute("allFactories", factoryService.getAllFactories());
+        model.addAttribute("factoryOne", factoryService.getFactoryByName("Naydenovi's Stanimaka EOOD"));
+        model.addAttribute("factoryTwo", factoryService.getFactoryByName("Naydenovi's Serdika EOOD"));
+        model.addAttribute("factoryThree", factoryService.getFactoryByName("Naydenovi's Pirgos EOOD"));
 
         return "factories";
     }

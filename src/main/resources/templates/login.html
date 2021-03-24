@@ -6,10 +6,10 @@
 <body>
 <header th:replace="fragments/commons::navigation"></header>
 <main class="p-5 align-content-center bg-blur my-register-div">
-    <h1 class="text-light    border-bottom mb-5">Login</h1>
+    <h1 class="text-light border-bottom mb-5">Login and browse & purchase our wines!</h1>
     <div class="d-flex justify-content-center">
         <div class="row g-3 align-items-center">
-            <img alt="Login image" src="/img/loginPhoto.jpg" class="w-50 rounded">
+            <img alt="Login image" src="/img/loginPhoto.jpg" class="w-75 rounded">
         </div>
         <div class="row g-3 align-items-center">
             <div th:if="${bad_credentials}" class="alert alert-danger" role="alert">
