@@ -2,6 +2,7 @@ package com.business.project.web;
 
 import com.business.project.model.binding.UserCommandBindingModel;
 import com.business.project.model.service.UserServiceModel;
+import com.business.project.service.LogService;
 import com.business.project.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
@@ -20,10 +21,12 @@ public class AdminController {
 
     private final UserService userService;
     private final ModelMapper modelMapper;
+    private final LogService logService;
 
-    public AdminController(UserService userService, ModelMapper modelMapper) {
+    public AdminController(UserService userService, ModelMapper modelMapper, LogService logService) {
         this.userService = userService;
         this.modelMapper = modelMapper;
+        this.logService = logService;
     }
 
     @GetMapping("/control")
@@ -93,5 +96,14 @@ public class AdminController {
 
         redirectAttributes.addFlashAttribute("userFound",true);
         redirectAttributes.addFlashAttribute("successCommand",false);
+    }
+
+    @GetMapping("/logs")
+    public String logs(Model model) {
+
+        model.addAttribute("allLogs", this.logService.getAllLogs());
+
+        return "log";
+
     }
 }
