@@ -27,4 +27,6 @@ public interface WineService {
     void buyWine(String name);
 
     WineServiceModel getWineById(Long wineId);
+
+    String getCountOfAllWines();
 }

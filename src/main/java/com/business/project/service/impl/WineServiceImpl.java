@@ -103,5 +103,14 @@ public class WineServiceImpl implements WineService {
         return this.modelMapper.map(wineEntity,WineServiceModel.class);
     }
 
+    @Override
+    public String getCountOfAllWines() {
+        int result = this.wineRepository.findAll().stream().mapToInt(WineEntity::getAmount).sum();
+        if (result==0) {
+            return "None";
+        }
+        return result+"";
+    }
+
 
 }
