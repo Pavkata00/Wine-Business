@@ -1,5 +1,7 @@
 package com.business.project.model.view;
 
+import com.business.project.model.entity.enums.TypeEnum;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 

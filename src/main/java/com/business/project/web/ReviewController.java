@@ -1,5 +1,6 @@
 package com.business.project.web;
 
+import com.business.project.exception.WineNotFoundException;
 import com.business.project.model.binding.ReviewAddBindingModel;
 import com.business.project.model.service.ReviewServiceModel;
 import com.business.project.model.view.ReviewViewModel;
@@ -35,6 +36,9 @@ public class ReviewController {
     @GetMapping("/browse-{type}")
     public String browse(@PathVariable String type, Model model) {
 
+        if (wineService.getWinesByType(type).size() == 0) {
+            return "type-empty";
+        }
         model.addAttribute("typeWines", wineService.getWinesByType(type));
 
         return "browse-wine";
@@ -46,7 +50,6 @@ public class ReviewController {
         if (!model.containsAttribute("reviewAddBindingModel")) {
             model.addAttribute("reviewAddBindingModel", new ReviewAddBindingModel());
             model.addAttribute("allWines",this.wineService.getAllWines());
-
         }
         return "add-review";
     }
