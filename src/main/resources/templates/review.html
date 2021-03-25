@@ -17,8 +17,8 @@
                 <dd class="col-sm-9" th:text="*{dateTime}">Release Date
                 </dd>
 
-                <dt class="col-sm-3">Rating give:</dt>
-                <dd class="col-sm-9" th:text="*{rating}">Artist
+                <dt class="col-sm-3">Rating given:</dt>
+                <dd class="col-sm-9" th:text="*{rating}">Rating
                 </dd>
 
                 <dt class="col-sm-3">Description</dt>
@@ -28,7 +28,7 @@
         </div>
         <div class="col">
             <div class="center">
-                <img alt="Login image" th:src="@{/img/purchaseComplete.jpg}" class="center" style="width: 100px">
+                <img alt="Login image" th:src="*{image}" class="center" style="width: 100px">
             </div>
         </div>
     </div>

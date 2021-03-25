@@ -35,6 +35,7 @@ public class ReviewServiceImpl implements ReviewService {
             ReviewViewModel reviewViewModel = this.modelMapper.map(reviewEntity,ReviewViewModel.class);
             reviewViewModel.setUser(reviewEntity.getUser().getFullName());
             reviewViewModel.setDateTime(reviewEntity.getDateTime().toString());
+            reviewViewModel.setImage("/img/"+reviewEntity.getRating()+".png");
 
             return reviewViewModel;
         }).collect(Collectors.toList());

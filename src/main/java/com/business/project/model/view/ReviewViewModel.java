@@ -6,6 +6,7 @@ public class ReviewViewModel {
     private String rating;
     private String dateTime;
     private String user;
+    private String image;
 
     public ReviewViewModel() {
     }
@@ -40,5 +41,13 @@ public class ReviewViewModel {
 
     public void setUser(String user) {
         this.user = user;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }
