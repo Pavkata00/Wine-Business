@@ -33,6 +33,7 @@ public class WineServiceImpl implements WineService {
         this.cloudinaryService = cloudinaryService;
     }
 
+
     @Override
     public void addWine(WineServiceModel wineServiceModel) throws IOException {
         WineEntity wineEntity = this.modelMapper.map(wineServiceModel, WineEntity.class);
