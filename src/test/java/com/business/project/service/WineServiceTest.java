@@ -7,6 +7,7 @@ import com.business.project.model.entity.UserEntity;
 import com.business.project.model.entity.WineEntity;
 import com.business.project.model.entity.enums.TypeEnum;
 import com.business.project.model.service.WineServiceModel;
+import com.business.project.model.view.WineViewModel;
 import com.business.project.repository.WineRepository;
 import com.business.project.service.impl.WineServiceImpl;
 import org.junit.jupiter.api.Assertions;
@@ -20,6 +21,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -46,13 +48,20 @@ public class WineServiceTest {
 
 
     private WineEntity wineEntity;
+    private WineEntity wineEntityTwo;
+    private WineViewModel wineViewModel;
     private WineServiceModel wineServiceModel;
     @BeforeEach
     public void setUp() {
         wineService= new WineServiceImpl(modelMapper,mockedWineRepository,factoryService,cloudinaryService);
         wineEntity = createWineEntity();
+        wineEntityTwo = createWineEntityTwo();
         wineServiceModel = createWineServiceModel();
+        wineViewModel = createWineViewModel();
     }
+
+
+
 
     @Test
     public void testGetCountOfAllWines() {
@@ -111,6 +120,68 @@ public class WineServiceTest {
 
     }
 
+    @Test
+    public void testGetAllWines() {
+
+        when(mockedWineRepository.findAll()).thenReturn(List.of(wineEntity,wineEntityTwo ));
+
+        List<WineViewModel> allWines = wineService.getAllWines();
+
+        Assertions.assertEquals(2,allWines.size());
+    }
+
+    @Test
+    public void testGetWineByName() {
+        when(mockedWineRepository.findByName("Mavrud")).thenReturn(Optional.of(wineEntity));
+
+        WineEntity mavrud = wineService.getWineByName("Mavrud");
+
+        Assertions.assertEquals(wineEntity.getName(),mavrud.getName());
+        Assertions.assertEquals(wineEntity.getType(),mavrud.getType());
+    }
+
+    @Test
+    public void testGetWineByInvalidName() {
+
+        Assertions.assertThrows(WineNotFoundException.class, () -> {
+            wineService.getWineByName("InvalidName");
+        });
+    }
+
+    @Test
+    public void testAddReviewToWine() {
+        when(mockedWineRepository.findByName("Mavrud")).thenReturn(Optional.of(wineEntity));
+
+        ReviewEntity reviewEntity = new ReviewEntity();
+
+        wineService.addReviewToWine(reviewEntity,"Mavrud");
+
+        Assertions.assertEquals(1, wineEntity.getReviews().size());
+    }
+
+    @Test
+    public void testAddReviewToWineWithInvalidName() {
+
+        ReviewEntity reviewEntity = new ReviewEntity();
+
+        Assertions.assertThrows(WineNotFoundException.class, () -> {
+            wineService.addReviewToWine(reviewEntity,"InvalidName");
+        });
+    }
+
+
+    @Test
+    public void testGetWinesByType() {
+
+        when(mockedWineRepository.findAllByType(TypeEnum.Mavrud)).thenReturn(List.of(wineEntity));
+
+        List<WineViewModel> winesByType = wineService.getWinesByType(TypeEnum.Mavrud.name());
+
+        Assertions.assertEquals(1, winesByType.size());
+        Assertions.assertEquals(wineEntity.getName(), winesByType.get(0).getName());
+
+    }
+
     private WineEntity createWineEntity() {
         WineEntity wineEntity = new WineEntity();
         wineEntity.setType(TypeEnum.Mavrud);
@@ -120,6 +191,27 @@ public class WineServiceTest {
         wineEntity.setMadeDate(LocalDate.now());
         wineEntity.setPrice(BigDecimal.valueOf(10));
         wineEntity.setName("testMavrud");
+
+        FactoryEntity factoryEntity = new FactoryEntity();
+        factoryEntity.setDescription("testFactory");
+        factoryEntity.setFoundedYear(2000);
+        factoryEntity.setName("Factory");
+
+        wineEntity.setFactory(factoryEntity);
+
+        wineEntity.setReviews(new ArrayList<>());
+        return wineEntity;
+    }
+
+    private WineEntity createWineEntityTwo() {
+        WineEntity wineEntity = new WineEntity();
+        wineEntity.setType(TypeEnum.Rose);
+        wineEntity.setImageUrl("testInvalid");
+        wineEntity.setAmount(5);
+        wineEntity.setDescription("random");
+        wineEntity.setMadeDate(LocalDate.now());
+        wineEntity.setPrice(BigDecimal.valueOf(10));
+        wineEntity.setName("testRose");
 
         FactoryEntity factoryEntity = new FactoryEntity();
         factoryEntity.setDescription("testFactory");
@@ -144,5 +236,19 @@ public class WineServiceTest {
 
 
         return wineServiceModel;
+    }
+
+    private WineViewModel createWineViewModel() {
+
+        WineViewModel wineViewModel = new WineViewModel();
+
+        wineViewModel.setAmount(1);
+        wineViewModel.setDescription("random");
+        wineViewModel.setMadeDate("2000");
+        wineViewModel.setPrice(BigDecimal.valueOf(10));
+        wineViewModel.setName("testMavrud");
+        wineViewModel.setFactory("testFactory");
+
+        return wineViewModel;
     }
 }
