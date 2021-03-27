@@ -34,6 +34,7 @@ public class UserControllerTest {
 
     @Test
     public void testRegisterConfirm() throws Exception {
+
         mockMvc.perform(post("/users/register")
         .param("username","peshoTest")
         .param("password","12345")
