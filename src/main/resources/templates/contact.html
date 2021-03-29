@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/commons :: head"></head>
+<body>
+<header th:replace="fragments/commons :: navigation"></header>
+
+<main class="container-fluid">
+    <h2 class="text-light">CONTACT US</h2> <br>
+    <div class="row">
+        <a name="contactform"></a>
+        <div class="col-lg-8 col-md-6 col-sm-4">
+            <div class="form-group bundletext" id="contactform">
+                <label for="exampleInputEmail1" class="text-light">Email Address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                <small id="emailHelp1" class="form-text text-body text-light"> * Your personal information is private and will not be shared.</small> </div>
+            <div class="form-group bundletext">
+                <label class="text-light">Ask us a question</label>
+                <input type="text-body" class="form-control" placeholder="Type here">
+            </div>
+            <button type="submit" class="btn btn-primary submit">SUBMIT</button>
+        </div>
+        <div class="col-lg-4 col-md-3 col-sm-2">
+            <h4 class="text-light"> Phone: +359 895 587 386 </h4>
+            <h4 class="text-light"> wine_naydenovi@gmail.com </h4>
+        </div>
+    </div>
+</main>
+
+
+
+
+</body>
+</html>

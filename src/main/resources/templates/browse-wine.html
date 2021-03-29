@@ -4,32 +4,36 @@
 <body>
 <header th:replace="fragments/commons :: navigation"></header>
 <main class="p-5 align-content-center bg-blur ">
-    <div th:each="t : ${typeWines}" th:object="${t}" class="col-md-3">
-        <div class="card mb-4 box-shadow">
-            <img th:src="*{imageUrl}" class="card-img" alt="Thumbnail [100%x225]"
-                 data-holder-rendered="true"
-                 style="height: 225px; width: 100%; display: block;">
-            <div class="card-body">
-                <div class="text-center">
-                    <p th:text="|Wine name: *{name}|" class="card-text border-bottom "></p>
-                    <p th:text="|Wine Price: *{price}|" class="card-text border-bottom "></p>
-                    <p th:text="|Available bottles: *{amount}|" class="card-text border-bottom "></p>
-                    <p th:text="|Description: *{description}|" class="card-text border-bottom "></p>
-                    <p th:text="|Made in: *{factory}, spring *{madeDate}|" class="card-text border-bottom "></p>
+    <div class="row">
+        <div th:each="t : ${typeWines}" th:object="${t}" class="col-md-3">
+            <div class="card mb-4 box-shadow">
+                <img th:src="*{imageUrl}" class="card-img" alt="Thumbnail [100%x225]"
+                     data-holder-rendered="true"
+                     style="height: 400px; width: 100%; display: block;">
+                <div class="card-body">
+                    <div class="text-center">
+                        <p th:text="|Wine name: *{name}|" class="card-text border-bottom "></p>
+                        <p th:text="|Wine Price: *{price}|" class="card-text border-bottom "></p>
+                        <p th:text="|Available bottles: *{amount}|" class="card-text border-bottom "></p>
+                        <p th:text="|Description: *{description}|" class="card-text border-bottom "></p>
+                        <p th:text="|Made in: *{factory}, *{madeDate}|" class="card-text border-bottom "></p>
+                        <p th:text="|Date:*{madeDate}|" class="card-text border-bottom "></p>
 
 
-                </div>
-                <div class="d-flex justify-content-between align-items-center">
-                    <div  class="btn-group">
-                        <a th:href="@{/reviews/buyOne/{name} (name = *{name})}" type="button" class="btn btn-sm btn-outline-secondary">Buy one</a>
                     </div>
-                    <div class="btn-group">
-                        <a th:href="@{/reviews/getReviews-{name} (name = *{name})}" type="button" class="btn btn-sm btn-outline-secondary">See reviews</a>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div  class="btn-group">
+                            <a th:href="@{/reviews/buyOne/{name} (name = *{name})}" type="button" class="btn btn-sm btn-outline-secondary">Buy one</a>
+                        </div>
+                        <div class="btn-group">
+                            <a th:href="@{/reviews/getReviews-{name} (name = *{name})}" type="button" class="btn btn-sm btn-outline-secondary">See reviews</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 </main>
 <footer th:replace="fragments/commons :: footer"></footer>
 
