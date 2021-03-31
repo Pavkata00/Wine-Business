@@ -28,4 +28,6 @@ public interface WineService {
     String getCountOfAllWines();
 
     void update(WineServiceModel wineServiceModel, String wineName);
+
+    WineViewModel getWineViewBydId(Long id);
 }

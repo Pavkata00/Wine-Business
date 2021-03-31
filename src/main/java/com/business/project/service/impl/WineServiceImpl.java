@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -119,6 +120,18 @@ public class WineServiceImpl implements WineService {
         wineEntity.setAmount(wineServiceModel.getAmount() + wineEntity.getAmount());
         wineEntity.setPrice(wineServiceModel.getPrice());
         this.wineRepository.save(wineEntity);
+
+    }
+
+    @Override
+    public WineViewModel getWineViewBydId(Long id) {
+        WineEntity byId = this.wineRepository.findById(id).orElseThrow(() -> new WineNotFoundException("This wine does not exist"));
+
+        WineViewModel wineViewModel = this.modelMapper.map(byId,WineViewModel.class);
+        wineViewModel.setFactory(byId.getFactory().getName());
+        wineViewModel.setMadeDate(byId.getMadeDate().toString());
+
+        return wineViewModel;
 
     }
 }

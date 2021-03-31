@@ -34,6 +34,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 antMatchers("/","/users/register","/users/login").permitAll().
                 antMatchers("/factory/view").permitAll().
                 antMatchers("/about").permitAll().
+                antMatchers("/wine-rest/api/**").permitAll().
                 antMatchers("/contact").permitAll().
                 antMatchers("/admin/**").hasRole("ADMIN").
                 antMatchers("/wine/**").hasRole("ADMIN").
