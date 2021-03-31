@@ -112,5 +112,13 @@ public class WineServiceImpl implements WineService {
         return result+"";
     }
 
+    @Override
+    public void update(WineServiceModel wineServiceModel, String wineName) {
+        WineEntity wineEntity = this.wineRepository.findByName(wineName)
+                .orElseThrow(() -> new WineNotFoundException("This wine does not exist in the database!"));
+        wineEntity.setAmount(wineServiceModel.getAmount() + wineEntity.getAmount());
+        wineEntity.setPrice(wineServiceModel.getPrice());
+        this.wineRepository.save(wineEntity);
 
+    }
 }

@@ -1,16 +1,17 @@
 package com.business.project.web;
 
 import com.business.project.model.binding.UserCommandBindingModel;
+import com.business.project.model.binding.WineUpdateBindingModel;
 import com.business.project.model.service.UserServiceModel;
+import com.business.project.model.service.WineServiceModel;
 import com.business.project.service.LogService;
 import com.business.project.service.UserService;
+import com.business.project.service.WineService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -22,11 +23,13 @@ public class AdminController {
     private final UserService userService;
     private final ModelMapper modelMapper;
     private final LogService logService;
+    private final WineService wineService;
 
-    public AdminController(UserService userService, ModelMapper modelMapper, LogService logService) {
+    public AdminController(UserService userService, ModelMapper modelMapper, LogService logService, WineService wineService) {
         this.userService = userService;
         this.modelMapper = modelMapper;
         this.logService = logService;
+        this.wineService = wineService;
     }
 
     @GetMapping("/control")
@@ -44,7 +47,7 @@ public class AdminController {
     }
 
     @PostMapping("/control")
-    private String controlConfirm(@Valid UserCommandBindingModel userCommandBindingModel,
+    public String controlConfirm(@Valid UserCommandBindingModel userCommandBindingModel,
                                   BindingResult  bindingResult,
                                   RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
@@ -104,6 +107,34 @@ public class AdminController {
         model.addAttribute("allLogs", this.logService.getAllLogs());
 
         return "log";
+
+    }
+
+    @GetMapping("/update/{name}")
+    public String update(@PathVariable String name, Model model) {
+        model.addAttribute("nameOfWine", name);
+
+        if (!model.containsAttribute("wineUpdateBindingModel")) {
+            model.addAttribute("wineUpdateBindingModel",new WineUpdateBindingModel());
+        }
+        return "update";
+    }
+
+    @PatchMapping("/fill/{wineName}")
+    public String updateConfirm(@Valid WineUpdateBindingModel wineUpdateBindingModel,
+                                BindingResult bindingResult,
+                                RedirectAttributes redirectAttributes,
+                                @PathVariable String wineName) {
+
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("wineUpdateBindingModel", wineUpdateBindingModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.wineUpdateBindingModel", bindingResult);
+            return "redirect:/admin/update/" + wineName;
+        }
+
+        WineServiceModel wineServiceModel = this.modelMapper.map(wineUpdateBindingModel,WineServiceModel.class);
+        this.wineService.update(wineServiceModel, wineName);
+        return "redirect:/";
 
     }
 }

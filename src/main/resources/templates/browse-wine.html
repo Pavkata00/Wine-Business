@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="fragments/commons :: head"></head>
 <body>
 <header th:replace="fragments/commons :: navigation"></header>
@@ -24,6 +25,9 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div  class="btn-group">
                             <a th:href="@{/reviews/buyOne/{name} (name = *{name})}" type="button" class="btn btn-sm btn-outline-secondary">Buy one</a>
+                        </div>
+                        <div sec:authorize="hasRole('ROLE_ADMIN')" class="btn-group">
+                            <a th:href="@{/admin/update/{name} (name = *{name})}" type="button" class="btn btn-sm btn-outline-secondary">Update</a>
                         </div>
                         <div class="btn-group">
                             <a th:href="@{/reviews/getReviews-{name} (name = *{name})}" type="button" class="btn btn-sm btn-outline-secondary">See reviews</a>

@@ -7,10 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -29,7 +26,7 @@ public class WineController {
     }
 
     @GetMapping("/add")
-    private String add(Model model) {
+    public String add(Model model) {
         if (!model.containsAttribute("wineAddBindingModel")) {
             model.addAttribute("wineAddBindingModel", new WineAddBindingModel());
         }
@@ -38,7 +35,7 @@ public class WineController {
     }
 
     @PostMapping("/add")
-    private String addConfirm(@Valid WineAddBindingModel wineAddBindingModel,
+    public String addConfirm(@Valid WineAddBindingModel wineAddBindingModel,
                               BindingResult bindingResult,
                               RedirectAttributes redirectAttributes) throws IOException {
 
@@ -54,6 +51,5 @@ public class WineController {
 
         return "redirect:/";
     }
-
 
 }
