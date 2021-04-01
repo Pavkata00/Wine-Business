@@ -2,6 +2,7 @@ package com.business.project.service.impl;
 
 import com.business.project.model.entity.LogEntity;
 import com.business.project.model.view.LogViewModel;
+import com.business.project.model.view.RecordViewModel;
 import com.business.project.repository.LogRepository;
 import com.business.project.service.LogService;
 import com.business.project.service.WineService;
@@ -47,4 +48,6 @@ public class LogServiceImpl implements LogService {
     public List<LogViewModel> getAllLogs() {
         return this.logRepository.findAll().stream().map(logEntity -> this.modelMapper.map(logEntity,LogViewModel.class)).collect(Collectors.toList());
     }
+
+
 }

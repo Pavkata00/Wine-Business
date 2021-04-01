@@ -9,11 +9,19 @@
 <header th:replace="fragments/commons :: navigation"></header>
 <main class="p-5 align-content-center bg-blur">
 
+    <div class="container">
+        <div class="content-area text-light">
+            <div class="row" th:text="|Your most bought wine is ${mostBoughtWine.name} with total of ${mostBoughtWine.amount} purchases.|">
+
+            </div>
+        </div>
+    </div>
+
     <div class="container-fluid">
         <div class="row">
 
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-                <h2 class="text-light">Users actions</h2>
+                <h2 class="text-light">Users actions for the last 24 hours</h2>
                 <div class="table-responsive text-light">
                     <table class="table table-striped table-sm">
                         <thead>
@@ -39,7 +47,7 @@
         </div>
     </div>
 </main>
-
-</body>
 <footer th:replace="fragments/commons :: footer"></footer>
+</body>
+
 </html>

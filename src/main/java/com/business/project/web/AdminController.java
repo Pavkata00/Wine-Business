@@ -5,6 +5,7 @@ import com.business.project.model.binding.WineUpdateBindingModel;
 import com.business.project.model.service.UserServiceModel;
 import com.business.project.model.service.WineServiceModel;
 import com.business.project.service.LogService;
+import com.business.project.service.RecordService;
 import com.business.project.service.UserService;
 import com.business.project.service.WineService;
 import org.modelmapper.ModelMapper;
@@ -24,12 +25,14 @@ public class AdminController {
     private final ModelMapper modelMapper;
     private final LogService logService;
     private final WineService wineService;
+    private final RecordService recordService;
 
-    public AdminController(UserService userService, ModelMapper modelMapper, LogService logService, WineService wineService) {
+    public AdminController(UserService userService, ModelMapper modelMapper, LogService logService, WineService wineService, RecordService recordService) {
         this.userService = userService;
         this.modelMapper = modelMapper;
         this.logService = logService;
         this.wineService = wineService;
+        this.recordService = recordService;
     }
 
     @GetMapping("/control")
@@ -105,6 +108,7 @@ public class AdminController {
     public String logs(Model model) {
 
         model.addAttribute("allLogs", this.logService.getAllLogs());
+        model.addAttribute("mostBoughtWine", this.recordService.getMostBoughtWine());
 
         return "log";
 
