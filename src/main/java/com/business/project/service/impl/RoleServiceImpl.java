@@ -32,11 +32,13 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public RoleEntity getAdminRole() {
-        return this.roleRepository.getOne(1L);
+        return this.roleRepository.
+                findByRole(RoleEnum.ADMIN).
+                orElseThrow(() -> new IllegalStateException("Please initialize the ADMIN role!"));
     }
 
     @Override
     public RoleEntity getUserRole() {
-        return this.roleRepository.getOne(2L);
+        return this.roleRepository.findByRole(RoleEnum.USER).orElseThrow(() -> new IllegalStateException("Please initialize the USER role"));
     }
 }
