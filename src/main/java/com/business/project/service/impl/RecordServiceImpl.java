@@ -42,7 +42,7 @@ public class RecordServiceImpl implements RecordService {
     public RecordViewModel getMostBoughtWine() {
         List<RecordEntity> mostBoughtWineRecords = this.recordRepository.findMostBoughtWineRecords();
 
-        if (mostBoughtWineRecords.isEmpty() || mostBoughtWineRecords == null) {
+        if (mostBoughtWineRecords.isEmpty()) {
             RecordViewModel recordViewModel = new RecordViewModel();
             recordViewModel.setAmount(0);
             recordViewModel.setName("None");
