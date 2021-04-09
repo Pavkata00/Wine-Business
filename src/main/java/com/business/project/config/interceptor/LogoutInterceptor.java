@@ -35,6 +35,11 @@ public class LogoutInterceptor implements HandlerInterceptor {
     }
 
     private static boolean isUserLogged() {
-        return SecurityContextHolder.getContext().getAuthentication().isAuthenticated();
+        try {
+            return !SecurityContextHolder.getContext().getAuthentication()
+                    .getName().equals("anonymousUser");
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
