@@ -51,6 +51,8 @@ public class WineServiceTest {
     private WineEntity wineEntityTwo;
     private WineViewModel wineViewModel;
     private WineServiceModel wineServiceModel;
+
+
     @BeforeEach
     public void setUp() {
         wineService= new WineServiceImpl(modelMapper,mockedWineRepository,factoryService,cloudinaryService);

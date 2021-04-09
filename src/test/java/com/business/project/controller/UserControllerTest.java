@@ -33,13 +33,77 @@ public class UserControllerTest {
     public void testRegisterConfirm() throws Exception {
 
         mockMvc.perform(post("/users/register")
-        .param("username","peshoTesta2")
+        .param("username","peshoTesta")
         .param("password","12345")
         .param("confirmPassword","12345")
         .param("fullName","Pesho Testa")
-        .param("email","pesho2Email@test.com")
+        .param("email","peshoemail@test.com")
         .with(csrf()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:login"));
+    }
+
+    @Test
+    public void testRegisterFailPassword() throws Exception {
+
+        mockMvc.perform(post("/users/register")
+                .param("username","peshoTesta")
+                .param("password","123")
+                .param("confirmPassword","123")
+                .param("fullName","Pesho Testa")
+                .param("email","peshoemail@test.com")
+                .with(csrf()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:register"));
+    }
+
+    @Test
+    public void testRegisterFailPasswordMatch() throws Exception {
+
+        mockMvc.perform(post("/users/register")
+                .param("username","peshoTesta")
+                .param("password","12345")
+                .param("confirmPassword","12354")
+                .param("fullName","Pesho Testa")
+                .param("email","peshoemail@test.com")
+                .with(csrf()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:register"));
+    }
+
+    @Test
+    public void testRegisterFailEmail() throws Exception {
+
+        mockMvc.perform(post("/users/register")
+                .param("username","peshoTesta")
+                .param("password","12345")
+                .param("confirmPassword","12354")
+                .param("fullName","Pesho Testa")
+                .param("email","peshoemailtest.com")
+                .with(csrf()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:register"));
+    }
+
+    @Test
+    public void testRegisterFailUsername() throws Exception {
+
+        mockMvc.perform(post("/users/register")
+                .param("username","pe")
+                .param("password","12345")
+                .param("confirmPassword","12354")
+                .param("fullName","Pesho Testa")
+                .param("email","peshoemail@test.com")
+                .with(csrf()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:register"));
+    }
+
+    @Test
+    public void testLogin() throws Exception {
+        mockMvc.perform(get("/users/login"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("login"))
+                .andExpect(model().attributeExists("bad_credentials","username"));
     }
 }

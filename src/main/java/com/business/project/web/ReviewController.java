@@ -1,6 +1,5 @@
 package com.business.project.web;
 
-import com.business.project.exception.WineNotFoundException;
 import com.business.project.model.binding.ReviewAddBindingModel;
 import com.business.project.model.service.ReviewServiceModel;
 import com.business.project.model.view.ReviewViewModel;
