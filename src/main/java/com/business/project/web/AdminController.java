@@ -42,7 +42,6 @@ public class AdminController {
             model.addAttribute("isAlreadyAdmin",false);
             model.addAttribute("isAlreadyGuestUser",false);
             model.addAttribute("userFound",true);
-            model.addAttribute("userFound", false);
 
         }
 

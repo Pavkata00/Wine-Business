@@ -11,6 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,7 +45,8 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public void addReviewToWine(ReviewServiceModel reviewServiceModel, String wineName) {
         ReviewEntity reviewEntity = this.modelMapper.map(reviewServiceModel,ReviewEntity.class);
-        reviewEntity.setDateTime(LocalDateTime.now());
+
+        reviewEntity.setDateTime(LocalDateTime.parse(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"))));
         reviewEntity.setUser(this.userService.getCurrentUser());
 
         this.reviewRepository.save(reviewEntity);

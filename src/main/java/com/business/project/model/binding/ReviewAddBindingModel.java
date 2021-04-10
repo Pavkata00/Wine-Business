@@ -1,16 +1,19 @@
 package com.business.project.model.binding;
 
 import org.hibernate.validator.constraints.Length;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
+import java.time.LocalDateTime;
 
 public class ReviewAddBindingModel {
 
     private String description;
     private String rating;
     private String wineName;
-    private String dateTime;
+    private LocalDateTime dateTime;
     private String user;
 
     public ReviewAddBindingModel() {
@@ -35,14 +38,6 @@ public class ReviewAddBindingModel {
         this.rating = rating;
     }
 
-    public String getDateTime() {
-        return dateTime;
-    }
-
-    public void setDateTime(String dateTime) {
-        this.dateTime = dateTime;
-    }
-
     public String getUser() {
         return user;
     }
@@ -58,5 +53,15 @@ public class ReviewAddBindingModel {
 
     public void setWineName(String wineName) {
         this.wineName = wineName;
+    }
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @PastOrPresent
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
     }
 }

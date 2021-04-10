@@ -12,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,7 +40,7 @@ public class LogServiceImpl implements LogService {
 
         logEntity.setWine(wineService.getWineByName(wineName).getName());
         logEntity.setAction(action);
-        logEntity.setLocalDateTime(LocalDateTime.now());
+        logEntity.setLocalDateTime(LocalDateTime.parse(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"))));
 
         this.logRepository.save(logEntity);
     }

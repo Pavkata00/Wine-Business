@@ -7,17 +7,17 @@
 <main class="p-5 align-content-center bg-blur ">
     <div class="row">
         <div th:each="t : ${typeWines}" th:object="${t}" class="col-md-3">
-            <div class="card mb-4 box-shadow">
+            <div class="card mb-4 box-shadow" >
                 <img th:src="*{imageUrl}" class="card-img" alt="Thumbnail [100%x225]"
                      data-holder-rendered="true"
-                     style="height: 400px; width: 100%; display: block;">
+                     style="height: 400px; width: 100%; display: block; background-color: #1c7430">
                 <div class="card-body">
                     <div class="text-center">
                         <p th:text="|Wine name: *{name}|" class="card-text border-bottom "></p>
                         <p th:text="|Wine Price: *{price}|" class="card-text border-bottom "></p>
                         <p th:text="|Available bottles: *{amount}|" class="card-text border-bottom "></p>
                         <p th:text="|Description: *{description}|" class="card-text border-bottom "></p>
-                        <p th:text="|Made in: *{factory}, *{madeDate}|" class="card-text border-bottom "></p>
+                        <p th:text="|Made in: *{factory}|" class="card-text border-bottom "></p>
                         <p th:text="|Date:*{madeDate}|" class="card-text border-bottom "></p>
 
 

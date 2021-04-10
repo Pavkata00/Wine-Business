@@ -39,7 +39,7 @@ public class UserRegisterBindingModel {
     }
 
     @NotBlank(message = "Must not be blank!")
-    @Length(min = 4, max = 20,message = "Password length must be between 4 and 20 characters")
+    @Length(min = 4, max = 20,message = "Password length must be between 4 and 20 characters. Passwords must match!")
     public String getPassword() {
         return password;
     }
